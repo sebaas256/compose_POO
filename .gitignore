@@ -1,0 +1,11 @@
+# Archivos compilados de Java
+*.class
+
+# Carpetas de compilacion de NetBeans
+/build/
+/dist/
+nbproject/private/
+
+# Archivos del so
+.DS_Store
+Thumbs.db
