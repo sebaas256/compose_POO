@@ -1,11 +1,19 @@
-# Archivos compilados de Java
+# Archivos compilados de Java (comunes)
 *.class
-
-# Carpetas de compilacion de NetBeans
-/build/
+*.war
+*.ear
 /dist/
-nbproject/private/
+/build/
+*.jar
 
-# Archivos del so
+# NetBeans (nbproject es crítico)
+nbproject/
+nbproject/private/
+build/
+dist/
+nbactions.xml
+nb-configuration.xml
+
+# Sistema y temporales
 .DS_Store
-Thumbs.db
+Thumbs.dbo
