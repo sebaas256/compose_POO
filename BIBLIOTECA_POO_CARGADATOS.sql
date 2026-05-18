@@ -1,10 +1,6 @@
 use BIBLIOTECA;
 go
 
-
-use BIBLIOTECA;
-go
-
 -- Insertando 100 estudiantes con dominio @itca.edu.sv
 insert into Estudiante (Nombre, Apellido, Genero, Edad, Email, ClaveAcceso) values
 ('Rodrigo', 'Pineda', 'Masculino', 20, 'rodrigo.pineda@itca.edu.sv', 'itca2024'),
@@ -109,68 +105,70 @@ insert into Estudiante (Nombre, Apellido, Genero, Edad, Email, ClaveAcceso) valu
 ('Lorena', 'Lozano', 'Femenino', 19, 'lorena.lozano@itca.edu.sv', 'l_lozano');
 go
 
--- ConfirmaciÛn de datos
-select * from Estudiante;
 
 -- Insertando 100 libros 
 insert into Libro (Codigo, Titulo, Autor, Editorial, GeneroLibro, Stock, Disponibilidad) values
-('LIT-001', 'Cuentos de Barro', 'SalarruÈ', 'DPI El Salvador', 'Literatura', 5, 1),
-('LIT-002', 'JÌcaras Tristes', 'Alfredo Espino', 'DPI El Salvador', 'PoesÌa', 8, 1),
-('LIT-003', 'Un dÌa en la vida', 'Manlio Argueta', 'UCA Editores', 'Novela', 4, 1),
-('LIT-004', 'El Asco', 'Horacio Castellanos Moya', 'Casiopea', 'FicciÛn', 3, 1),
-('LIT-005', 'Tierra de Infancia', 'Claudia Lars', 'Editorial Delgado', 'PoesÌa', 6, 1),
-('LIT-006', 'Roque Dalton: PoesÌa Escogida', 'Roque Dalton', 'UCA Editores', 'PoesÌa', 5, 1),
-('LIT-007', 'Leyendas de Guatemala', 'Miguel ¡ngel Asturias', 'Fondo de Cultura', 'Literatura', 4, 1),
-('SOFT-001', 'Java a Fondo', 'Pablo Sznajdleder', 'Alfaomega', 'ProgramaciÛn', 10, 1),
-('SOFT-002', 'Patrones de DiseÒo en Java', 'Erich Gamma', 'Addison-Wesley', 'Software', 5, 1),
+('LIT-001', 'Cuentos de Barro', 'Salarru√©', 'DPI El Salvador', 'Literatura', 5, 1),
+('LIT-002', 'J√≠caras Tristes', 'Alfredo Espino', 'DPI El Salvador', 'Poes√≠a', 8, 1),
+('LIT-003', 'Un d√≠a en la vida', 'Manlio Argueta', 'UCA Editores', 'Novela', 4, 1),
+('LIT-004', 'El Asco', 'Horacio Castellanos Moya', 'Casiopea', 'Ficci√≥n', 3, 1),
+('LIT-005', 'Tierra de Infancia', 'Claudia Lars', 'Editorial Delgado', 'Poes√≠a', 6, 1),
+('LIT-006', 'Roque Dalton: Poes√≠a Escogida', 'Roque Dalton', 'UCA Editores', 'Poes√≠a', 5, 1),
+('LIT-007', 'Leyendas de Guatemala', 'Miguel √Ångel Asturias', 'Fondo de Cultura', 'Literatura', 4, 1),
+('SOFT-001', 'Java a Fondo', 'Pablo Sznajdleder', 'Alfaomega', 'Programaci√≥n', 10, 1),
+('SOFT-002', 'Patrones de Dise√±o en Java', 'Erich Gamma', 'Addison-Wesley', 'Software', 5, 1),
 ('SOFT-003', 'Inteligencia Artificial: Un Enfoque Moderno', 'Stuart Russell', 'Pearson', 'IA', 4, 1),
 ('SOFT-004', 'Clean Code', 'Robert C. Martin', 'Prentice Hall', 'Software', 7, 1),
-('SOFT-005', 'Estructuras de Datos con C++', 'Luis Joyanes', 'McGrawHill', 'ProgramaciÛn', 8, 1),
-('SOFT-006', 'SQL Avanzado para Bases de Datos', 'Ricardo Castro', 'TÈcnica SV', 'Bases de Datos', 12, 1),
-('RED-001', 'CCNA 200-301 GuÌa de Estudio', 'Wendell Odom', 'Cisco Press', 'Redes', 10, 1),
+('SOFT-005', 'Estructuras de Datos con C++', 'Luis Joyanes', 'McGrawHill', 'Programaci√≥n', 8, 1),
+('SOFT-006', 'SQL Avanzado para Bases de Datos', 'Ricardo Castro', 'T√©cnica SV', 'Bases de Datos', 12, 1),
+('RED-001', 'CCNA 200-301 Gu√≠a de Estudio', 'Wendell Odom', 'Cisco Press', 'Redes', 10, 1),
 ('RED-002', 'Redes de Computadoras', 'Andrew Tanenbaum', 'Pearson', 'Infraestructura', 6, 1),
 ('HARD-001', 'Arquitectura de Computadores', 'M. Morris Mano', 'Pearson', 'Hardware', 5, 1),
 ('HARD-002', 'Mantenimiento Preventivo de PC', 'Jean Andrews', 'Cengage', 'Hardware', 10, 1),
-('MTR-001', 'IntroducciÛn a la MecatrÛnica', 'David Alciatore', 'McGrawHill', 'MecatrÛnica', 5, 1),
-('MTR-002', 'Sistemas de Control Autom·tico', 'Benjamin Kuo', 'Prentice Hall', 'IngenierÌa', 4, 1),
-('ELE-001', 'Dispositivos ElectrÛnicos', 'Thomas Floyd', 'Pearson', 'ElectrÛnica', 9, 1),
-('ELE-002', 'Sistemas Digitales', 'Ronald Tocci', 'Pearson', 'ElectrÛnica', 7, 1),
-('AUTO-001', 'Sistemas de VehÌculos ElÈctricos', 'James Larminie', 'Wiley', 'Electromovilidad', 4, 1),
-('AUTO-002', 'Mec·nica Automotriz Moderna', 'James Duffy', 'Goodheart-Willcox', 'Automotriz', 6, 1),
-('CIV-001', 'An·lisis Estructural', 'Russell Hibbeler', 'Pearson', 'Civil', 5, 1),
-('CIV-002', 'Mec·nica de Suelos', 'Karl Terzaghi', 'Limusa', 'Civil', 4, 1),
+('MTR-001', 'Introducci√≥n a la Mecatr√≥nica', 'David Alciatore', 'McGrawHill', 'Mecatr√≥nica', 5, 1),
+('MTR-002', 'Sistemas de Control Autom√°tico', 'Benjamin Kuo', 'Prentice Hall', 'Ingenier√≠a', 4, 1),
+('ELE-001', 'Dispositivos Electr√≥nicos', 'Thomas Floyd', 'Pearson', 'Electr√≥nica', 9, 1),
+('ELE-002', 'Sistemas Digitales', 'Ronald Tocci', 'Pearson', 'Electr√≥nica', 7, 1),
+('AUTO-001', 'Sistemas de Veh√≠culos El√©ctricos', 'James Larminie', 'Wiley', 'Electromovilidad', 4, 1),
+('AUTO-002', 'Mec√°nica Automotriz Moderna', 'James Duffy', 'Goodheart-Willcox', 'Automotriz', 6, 1),
+('CIV-001', 'An√°lisis Estructural', 'Russell Hibbeler', 'Pearson', 'Civil', 5, 1),
+('CIV-002', 'Mec√°nica de Suelos', 'Karl Terzaghi', 'Limusa', 'Civil', 4, 1),
 ('ARQ-001', 'Neufert: El Arte de Proyectar en Arquitectura', 'Ernst Neufert', 'Gustavo Gili', 'Arquitectura', 3, 1),
-('ARQ-002', 'Historia de la Arquitectura en El Salvador', 'Gustavo Mil·n', 'DPI', 'Arquitectura', 2, 1),
-('GAS-001', 'TÈcnicas Culinarias de Vanguardia', 'Le Cordon Bleu', 'H. Fullmann', 'GastronomÌa', 5, 1),
-('GAS-002', 'La Cocina SalvadoreÒa', 'Vilma G. de Escobar', 'Editorial Ricaldone', 'GastronomÌa', 10, 1),
-('GAS-003', 'AdministraciÛn de Alimentos y Bebidas', 'Bernard Davis', 'Routledge', 'GestiÛn', 5, 1),
-('QUI-001', 'QuÌmica General', 'Raymond Chang', 'McGrawHill', 'QuÌmica', 12, 1),
-('QUI-002', 'An·lisis QuÌmico Cuantitativo', 'Daniel Harris', 'RevertÈ', 'Laboratorio', 6, 1),
-('QUI-003', 'Operaciones Unitarias en IngenierÌa QuÌmica', 'Warren McCabe', 'McGrawHill', 'Industrial', 5, 1),
-('MEC-001', 'TecnologÌa de las M·quinas Herramienta', 'Steve Krar', 'McGrawHill', 'Mec·nica', 6, 1),
-('MEC-002', 'ProgramaciÛn de CNC', 'Francisco Cruz', 'Alfaomega', 'CNC', 8, 1),
+('ARQ-002', 'Historia de la Arquitectura en El Salvador', 'Gustavo Mil√°n', 'DPI', 'Arquitectura', 2, 1),
+('GAS-001', 'T√©cnicas Culinarias de Vanguardia', 'Le Cordon Bleu', 'H. Fullmann', 'Gastronom√≠a', 5, 1),
+('GAS-002', 'La Cocina Salvadore√±a', 'Vilma G. de Escobar', 'Editorial Ricaldone', 'Gastronom√≠a', 10, 1),
+('GAS-003', 'Administraci√≥n de Alimentos y Bebidas', 'Bernard Davis', 'Routledge', 'Gesti√≥n', 5, 1),
+('QUI-001', 'Qu√≠mica General', 'Raymond Chang', 'McGrawHill', 'Qu√≠mica', 12, 1),
+('QUI-002', 'An√°lisis Qu√≠mico Cuantitativo', 'Daniel Harris', 'Revert√©', 'Laboratorio', 6, 1),
+('QUI-003', 'Operaciones Unitarias en Ingenier√≠a Qu√≠mica', 'Warren McCabe', 'McGrawHill', 'Industrial', 5, 1),
+('MEC-001', 'Tecnolog√≠a de las M√°quinas Herramienta', 'Steve Krar', 'McGrawHill', 'Mec√°nica', 6, 1),
+('MEC-002', 'Programaci√≥n de CNC', 'Francisco Cruz', 'Alfaomega', 'CNC', 8, 1),
 ('MEC-003', 'Mantenimiento Industrial Preventivo', 'Enrique Dounce', 'Patria', 'Mantenimiento', 7, 1),
 ('MAN-001', 'Industria 4.0 y Manufactura Inteligente', 'Diego Galar', 'CRC Press', 'Manufactura', 4, 1),
-('ENR-001', 'EnergÌa Solar Fotovoltaica', 'Miguel Pareja', 'Marcombo', 'EnergÌa', 6, 1),
-('ENR-002', 'Sistemas de EnergÌa EÛlica', 'Vaughn Nelson', 'CRC Press', 'EnergÌa', 3, 1),
-('ELC-001', 'Circuitos ElÈctricos', 'James Nilsson', 'Pearson', 'ElÈctrica', 10, 1);
+('ENR-001', 'Energ√≠a Solar Fotovoltaica', 'Miguel Pareja', 'Marcombo', 'Energ√≠a', 6, 1),
+('ENR-002', 'Sistemas de Energ√≠a E√≥lica', 'Vaughn Nelson', 'CRC Press', 'Energ√≠a', 3, 1),
+('ELC-001', 'Circuitos El√©ctricos', 'James Nilsson', 'Pearson', 'El√©ctrica', 10, 1);
 
--- Generando el resto (hasta llegar a 100) para completar el cat·logo variado
+-- Credenciales de acceso para el login
+insert into Usuario (NombreCompleto, NombreUsuario, Password, Rol)
+values ('Administrador Principal', 'admin', 'admin123', 'Administrador');
+
+-- Generando el resto (hasta llegar a 100)
 declare @i int = 42;
 while @i <= 100
 begin
     insert into Libro (Codigo, Titulo, Autor, Editorial, GeneroLibro, Stock, Disponibilidad)
     values (
         'TEC-' + right('000' + cast(@i as varchar), 3),
-        'GuÌa TÈcnica Especializada FascÌculo ' + cast(@i as varchar),
+        'Gu√≠a T√©cnica Especializada Fasc√≠culo ' + cast(@i as varchar),
         'Varios Autores ITCA',
         'Editorial ITCA-FEPADE',
         case 
-            when @i % 5 = 0 then 'Manuales TÈcnicos'
-            when @i % 5 = 1 then 'Matem·tica Aplicada'
-            when @i % 5 = 2 then 'FÌsica Industrial'
-            when @i % 5 = 3 then '…tica Profesional'
-            else 'InglÈs TÈcnico'
+            when @i % 5 = 0 then 'Manuales T√©cnicos'
+            when @i % 5 = 1 then 'Matem√°tica Aplicada'
+            when @i % 5 = 2 then 'F√≠sica Industrial'
+            when @i % 5 = 3 then '√âtica Profesional'
+            else 'Ingl√©s T√©cnico'
         end,
         5 + (@i % 10),
         1
@@ -178,18 +176,6 @@ begin
     set @i = @i + 1;
 end
 go
-
--- VerificaciÛn de carga
-select GeneroLibro, count(*) as CantidadLibros 
-from Libro 
-group by GeneroLibro;
-
-select * from Prestamo
-
-
-
--- EXEC sp_rename 'Prestamo.Estadp', 'Estado', 'COLUMN';
-
 
 
 -- Usamos un bucle para asegurar que los IDs existan y las fechas tengan sentido
@@ -205,21 +191,23 @@ begin
     set @randomEstudiante = (select top 1 IDEstudiante from Estudiante order by newid());
     set @randomLibro = (select top 1 IDLibro from Libro order by newid());
     
-    -- Simulamos que los prÈstamos ocurrieron en los ˙ltimos 60 dÌas
+    -- Simulamos que los pr√©stamos ocurrieron en los √∫ltimos 60 d√≠as
     set @fSalida = dateadd(day, -(@i % 60), getdate());
-    set @fMax = dateadd(day, 8, @fSalida); -- Dan 8 dÌas para devolver
+    set @fMax = dateadd(day, 8, @fSalida); -- Dan 8 d√≠as para devolver
 
-    insert into Prestamo (IDEstudiante, IDLibro, FechaSalida, FechaMaxDevolucion, FechaEntrega, Estado)
+    -- CAMBIO: A√±adimos IDUsuario = 1 (El Administrador) a cada pr√©stamo
+    insert into Prestamo (IDEstudiante, IDLibro, IDUsuario, FechaSalida, FechaMaxDevolucion, FechaEntrega, Estado)
     values (
         @randomEstudiante,
         @randomLibro,
+        1, -- Asignando el pr√©stamo al usuario administrador
         @fSalida,
         @fMax,
-        -- LÛgica para el estado:
+        -- L√≥gica para el estado:
         case 
-            when @i % 10 = 0 then null -- 10% est·n en MORA (no entregados y viejos)
-            when @i % 3 = 0 then null  -- Algunos siguen ACTIVOS (recientes)
-            else dateadd(day, 5, @fSalida) -- El resto se DEVOLVI” a los 5 dÌas (a tiempo)
+            when @i % 10 = 0 then null -- 10% est√°n en MORA
+            when @i % 3 = 0 then null  -- Algunos siguen ACTIVOS
+            else dateadd(day, 5, @fSalida) -- El resto se DEVOLVI√ì
         end,
         case 
             when @i % 10 = 0 then 'Mora'
@@ -231,13 +219,8 @@ begin
 end
 go
 
--- VerificaciÛn r·pida de los estados generados
-select Estado, count(*) as Cantidad from Prestamo group by Estado;
-
-
 
 -- Poblamos la tabla Transaccion (100 registros)
--- Vamos a vincularlos con los IDPrestamo que ya existen
 declare @i int = 1;
 declare @idPrestamo int;
 declare @montoMora decimal(10,2);
@@ -245,33 +228,32 @@ declare @estadoPrestamo varchar(20);
 
 while @i <= 100
 begin
-    -- Seleccionamos el ID del prÈstamo de forma secuencial para cubrir los 100
     set @idPrestamo = @i;
-    
-    -- Obtenemos el estado de ese prÈstamo para decidir si cobramos mora
     set @estadoPrestamo = (select Estado from Prestamo where IDPrestamo = @idPrestamo);
 
     if (@estadoPrestamo = 'Mora')
     begin
-        -- Si est· en mora, asignamos una multa (ejemplo entre $1.50 y $5.00)
         set @montoMora = 1.50 + (rand() * 3.50);
-        insert into Transaccion (IDPrestamo, Mora, FechaTransaccion, DetalleTransaccion)
+        -- CAMBIO: A√±adimos IDUsuario = 1
+        insert into Transaccion (IDPrestamo, IDUsuario, Mora, FechaTransaccion, DetalleTransaccion)
         values (
             @idPrestamo, 
+            1, -- Asignando la transacci√≥n al usuario administrador
             @montoMora, 
             getdate(), 
-            'Cobro de multa por entrega tardÌa - Usuario ITCA'
+            'Cobro de multa por entrega tard√≠a - Usuario ITCA'
         );
     end
     else
     begin
-        -- Si no hay mora, el cobro es $0.00 (solo registro de tr·mite)
-        insert into Transaccion (IDPrestamo, Mora, FechaTransaccion, DetalleTransaccion)
+        -- CAMBIO: A√±adimos IDUsuario = 1
+        insert into Transaccion (IDPrestamo, IDUsuario, Mora, FechaTransaccion, DetalleTransaccion)
         values (
             @idPrestamo, 
+            1, -- Asignando la transacci√≥n al usuario administrador
             0.00, 
             getdate(), 
-            'EmisiÛn de ticket de prÈstamo - Sin cargos'
+            'Emisi√≥n de ticket de pr√©stamo - Sin cargos'
         );
     end
 
@@ -279,7 +261,10 @@ begin
 end
 go
 
--- Consultas finales para verificar que todo estÈ en orden:
+
+-- ==========================================
+-- CONSULTAS FINALES (ACTUALIZADA CON TRAZABILIDAD)
+-- ==========================================
 print '--- RESUMEN DE CARGA FINAL ---';
 select 'Estudiantes' as Tabla, count(*) as Total from Estudiante
 union all
@@ -289,10 +274,11 @@ select 'Prestamos', count(*) from Prestamo
 union all
 select 'Transacciones', count(*) from Transaccion;
 
--- Ver un ejemplo de los datos finales combinados
+-- CAMBIO: Modifiqu√© el SELECT final para mostrar al usuario que atendi√≥ el pr√©stamo
 select top 10 
     E.Nombre + ' ' + E.Apellido as Estudiante,
     L.Titulo as Libro,
+    U.NombreUsuario as AtendidoPor, -- Aqu√≠ vemos la trazabilidad
     P.Estado,
     T.Mora as MultaPagada,
     T.DetalleTransaccion
@@ -300,4 +286,7 @@ from Transaccion T
 join Prestamo P on T.IDPrestamo = P.IDPrestamo
 join Estudiante E on P.IDEstudiante = E.IDEstudiante
 join Libro L on P.IDLibro = L.IDLibro
+join Usuario U on P.IDUsuario = U.IDUsuario -- Uni√≥n con la tabla de usuarios
 order by T.Mora desc;
+go
+

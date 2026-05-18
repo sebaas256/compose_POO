@@ -1,7 +1,6 @@
 use master;
 go
 
-
 if exists (select name from sys.databases where name = 'BIBLIOTECA')
 begin
     drop database BIBLIOTECA;
@@ -14,6 +13,26 @@ go
 use BIBLIOTECA;
 go
 
+-- ==========================================
+-- 1. TABLA PARA EL LOGIN GERENCIAL / PERSONAL
+-- ==========================================
+create table Usuario (
+    IDUsuario int identity(1,1) not null,
+    NombreCompleto varchar(100) not null,
+    NombreUsuario varchar(50) not null unique,
+    Password varchar(255) not null, -- En producción se recomienda encriptar
+    Rol varchar(30) default 'Bibliotecario' -- Ej: 'Administrador', 'Bibliotecario'
+);
+go
+
+alter table Usuario
+add constraint PKUsuario primary key (IDUsuario);
+go
+
+-- ==========================================
+-- 2. TABLAS DEL NEGOCIO (BIBLIOTECA)
+-- ==========================================
+
 -- Tabla de Estudiantes
 create table Estudiante (
     IDEstudiante int identity(1,1) not null,
@@ -22,7 +41,7 @@ create table Estudiante (
     Genero varchar(10),
     Edad int,
     Email varchar(100),
-    ClaveAcceso varchar(20)
+    ClaveAcceso varchar(20) -- Para el acceso de los alumnos
 );
 go
 
@@ -30,7 +49,7 @@ alter table Estudiante
 add constraint PKEstudiante primary key (IDEstudiante);
 go
 
---  Libros
+-- Tabla de Libros
 create table Libro (
     IDLibro int identity(1,1) not null,
     Codigo varchar(20) not null,
@@ -47,11 +66,12 @@ alter table Libro
 add constraint PKLibro primary key (IDLibro);
 go
 
--- Pr�stamo
+-- Tabla de Préstamo (Incluye trazabilidad del usuario)
 create table Prestamo (
     IDPrestamo int identity(1,1) not null,
     IDEstudiante int not null,
     IDLibro int not null,
+    IDUsuario int not null, -- Bibliotecario que procesa el préstamo
     FechaSalida datetime default getdate(),
     FechaMaxDevolucion datetime not null,
     FechaEntrega datetime null,
@@ -63,10 +83,11 @@ alter table Prestamo
 add constraint PKPrestamo primary key (IDPrestamo);
 go
 
--- Transacciones y Sanciones
+-- Tabla de Transacciones y Sanciones (Incluye trazabilidad del usuario)
 create table Transaccion (
     IDTransaccion int identity(1,1) not null,
     IDPrestamo int not null,
+    IDUsuario int not null, -- Personal que registra o cobra la mora
     Mora decimal(10,2) default 0.00,
     FechaTransaccion datetime default getdate(),
     DetalleTransaccion varchar(200)
@@ -77,8 +98,11 @@ alter table Transaccion
 add constraint PKTransaccion primary key (IDTransaccion);
 go
 
---- LLAVES FOR�NEAS ---
+-- ==========================================
+-- 3. DEFINICIÓN DE LLAVES FORÁNEAS
+-- ==========================================
 
+-- Relaciones de la tabla Prestamo
 alter table Prestamo
 add constraint FKPrestamoEstudiante
 foreign key (IDEstudiante)
@@ -88,16 +112,34 @@ go
 alter table Prestamo
 add constraint FKPrestamoLibro
 foreign key (IDLibro)
-references libro(IDLibro);
+references Libro(IDLibro);
 go
 
+alter table Prestamo
+add constraint FKPrestamoUsuario
+foreign key (IDUsuario)
+references Usuario(IDUsuario);
+go
+
+-- Relaciones de la tabla Transaccion
 alter table Transaccion
 add constraint FKTransaccionPrestamo
 foreign key (IDPrestamo)
 references Prestamo(IDPrestamo);
 go
 
-select * from Estudiante
-select * from Libro
-select * from Prestamo
-select * from Transaccion
+alter table Transaccion
+add constraint FKTransaccionUsuario
+foreign key (IDUsuario)
+references Usuario(IDUsuario);
+go
+
+-- ==========================================
+-- 5. CONSULTAS DE VERIFICACIÓN
+-- ==========================================
+select * from Usuario;
+select * from Estudiante;
+select * from Libro;
+select * from Prestamo;
+select * from Transaccion;
+go
