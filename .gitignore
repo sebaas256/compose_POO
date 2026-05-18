@@ -1,4 +1,4 @@
-# Archivos compilados de Java (comunes)
+	# Archivos compilados de Java (comunes)
 *.class
 *.war
 *.ear
@@ -6,8 +6,7 @@
 /build/
 *.jar
 
-# NetBeans (nbproject es crítico)
-nbproject/
+# NetBeans
 nbproject/private/
 build/
 dist/
