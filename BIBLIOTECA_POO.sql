@@ -17,11 +17,11 @@ go
 -- 1. TABLA PARA EL LOGIN GERENCIAL / PERSONAL
 -- ==========================================
 create table Usuario (
-    IDUsuario int identity(1,1) not null,
-    NombreCompleto varchar(100) not null,
-    NombreUsuario varchar(50) not null unique,
-    Password varchar(255) not null, -- En producción se recomienda encriptar
-    Rol varchar(30) default 'Bibliotecario' -- Ej: 'Administrador', 'Bibliotecario'
+    idusuario int identity(1,1) not null,
+    nombre_completo varchar(100) not null,
+    nombre_usuario varchar(50) not null unique,
+    password varchar(255) not null, -- En producción se recomienda encriptar
+    rol varchar(30) default 'Bibliotecario' -- Ej: 'Administrador', 'Bibliotecario'
 );
 go
 
@@ -143,3 +143,4 @@ select * from Libro;
 select * from Prestamo;
 select * from Transaccion;
 go
+

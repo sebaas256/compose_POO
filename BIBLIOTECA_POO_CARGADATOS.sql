@@ -150,9 +150,11 @@ insert into Libro (Codigo, Titulo, Autor, Editorial, GeneroLibro, Stock, Disponi
 ('ELC-001', 'Circuitos Eléctricos', 'James Nilsson', 'Pearson', 'Eléctrica', 10, 1);
 
 -- Credenciales de acceso para el login
-insert into Usuario (NombreCompleto, NombreUsuario, Password, Rol)
+insert into Usuario (nombre_completo, nombre_usuario, password, rol)
 values ('Administrador Principal', 'admin', 'admin123', 'Administrador');
 
+
+select * from Usuario
 -- Generando el resto (hasta llegar a 100)
 declare @i int = 42;
 while @i <= 100
@@ -289,4 +291,3 @@ join Libro L on P.IDLibro = L.IDLibro
 join Usuario U on P.IDUsuario = U.IDUsuario -- Unión con la tabla de usuarios
 order by T.Mora desc;
 go
-
