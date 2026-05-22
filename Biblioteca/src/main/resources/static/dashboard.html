@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Panel Gerencial - Biblioteca</title>
+    <link rel="stylesheet" href="css/main.css">
+</head>
+<body>
+<div class="layout">
+
+<aside id="sidebar" class="sidebar"></aside>
+
+    <main class="contenido-principal">
+        <div class="page-header">
+            <h1 class="page-header__titulo">Sistema de Información Gerencial</h1>
+            <p class="page-header__subtitulo">Reporte General e Indicadores de Rendimiento</p>
+        </div>
+
+        <!-- Métricas -->
+        <!-- TODO (Backend): GET /api/dashboard/metricas -->
+        <div class="metricas">
+            <div class="metrica-card">
+                <div class="metrica-card__label">Total Ejemplares</div>
+                <div class="metrica-card__valor" id="metrica-ejemplares">635</div>
+            </div>
+            <div class="metrica-card">
+                <div class="metrica-card__label">Préstamos Activos</div>
+                <div class="metrica-card__valor metrica-card__valor--azul" id="metrica-activos">33</div>
+            </div>
+            <div class="metrica-card">
+                <div class="metrica-card__label">En Mora</div>
+                <div class="metrica-card__valor metrica-card__valor--rojo" id="metrica-mora">10</div>
+            </div>
+            <div class="metrica-card">
+                <div class="metrica-card__label">Total Recaudado</div>
+                <div class="metrica-card__valor metrica-card__valor--verde" id="metrica-recaudado">$42.50</div>
+            </div>
+        </div>
+
+        <!-- Últimos préstamos -->
+        <!-- TODO (Backend): GET /api/dashboard/ultimos-prestamos -->
+        <div class="seccion">
+            <h2 class="seccion__titulo">Últimos Préstamos Procesados (Trazabilidad)</h2>
+            <table class="tabla">
+                <thead>
+                    <tr>
+                        <th>Estudiante</th><th>Libro</th><th>Atendido Por</th>
+                        <th>Estado</th><th>Multa</th><th>Detalle</th>
+                    </tr>
+                </thead>
+                <tbody id="tabla-prestamos">
+                    <!-- dashboard.js inserta filas aquí -->
+                </tbody>
+            </table>
+        </div>
+    </main>
+
+</div>
+<script type="module" src="js/dashboard.js"></script>
+</body>
+</html>

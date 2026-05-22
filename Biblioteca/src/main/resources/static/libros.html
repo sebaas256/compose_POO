@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Libros - Biblioteca</title>
+    <link rel="stylesheet" href="css/main.css">
+</head>
+<body>
+<div class="layout">
+
+<aside id="sidebar" class="sidebar"></aside>
+
+    <main class="contenido-principal">
+        <div class="page-header">
+            <h1 class="page-header__titulo">Gestión de Libros</h1>
+            <p class="page-header__subtitulo">Catálogo de ejemplares disponibles</p>
+        </div>
+
+        <!-- Formulario -->
+        <!-- TODO (Backend): POST /api/libros -->
+        <div class="seccion">
+            <h2 class="seccion__titulo">Registrar Nuevo Libro</h2>
+            <div class="form-grid">
+                <div class="form-grupo">
+                    <label for="lib-codigo">Código</label>
+                    <input type="text" id="lib-codigo" placeholder="Ej: LIB-005">
+                </div>
+                <div class="form-grupo">
+                    <label for="lib-titulo">Título</label>
+                    <input type="text" id="lib-titulo" placeholder="Título del libro">
+                </div>
+                <div class="form-grupo">
+                    <label for="lib-autor">Autor</label>
+                    <input type="text" id="lib-autor" placeholder="Nombre del autor">
+                </div>
+                <div class="form-grupo">
+                    <label for="lib-editorial">Editorial</label>
+                    <input type="text" id="lib-editorial" placeholder="Editorial">
+                </div>
+                <div class="form-grupo">
+                    <label for="lib-genero">Género</label>
+                    <select id="lib-genero">
+                        <option value="">— Seleccionar —</option>
+                        <option>Tecnología</option>
+                        <option>Literatura</option>
+                        <option>Ciencias</option>
+                        <option>Redes</option>
+                        <option>Matemáticas</option>
+                        <option>Historia</option>
+                    </select>
+                </div>
+                <div class="form-grupo">
+                    <label for="lib-stock">Stock</label>
+                    <input type="number" id="lib-stock" min="0" placeholder="0">
+                </div>
+            </div>
+            <div class="form-acciones">
+                <button class="btn btn--primario" id="btn-guardar-libro">Guardar Libro</button>
+                <button class="btn btn--secundario" id="btn-limpiar-libro">Limpiar</button>
+            </div>
+        </div>
+
+        <!-- Tabla -->
+        <!-- TODO (Backend): GET /api/libros -->
+        <div class="seccion">
+            <h2 class="seccion__titulo">Listado de Libros</h2>
+            <table class="tabla">
+                <thead>
+                    <tr>
+                        <th>#</th><th>Código</th><th>Título</th><th>Autor</th>
+                        <th>Editorial</th><th>Género</th><th>Stock</th><th>Estado</th>
+                    </tr>
+                </thead>
+                <tbody id="tabla-libros">
+                    <!-- libros.js inserta filas aquí -->
+                </tbody>
+            </table>
+        </div>
+    </main>
+
+</div>
+<script type="module" src="js/libros.js"></script>
+</body>
+</html>

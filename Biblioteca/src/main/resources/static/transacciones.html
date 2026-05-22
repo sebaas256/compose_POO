@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Transacciones - Biblioteca</title>
+    <link rel="stylesheet" href="css/main.css">
+</head>
+<body>
+<div class="layout">
+
+<aside id="sidebar" class="sidebar"></aside>
+
+    <main class="contenido-principal">
+        <div class="page-header">
+            <h1 class="page-header__titulo">Transacciones y Sanciones</h1>
+            <p class="page-header__subtitulo">Historial de moras y cobros registrados</p>
+        </div>
+
+        <!-- Formulario -->
+        <!-- TODO (Backend): POST /api/transacciones -->
+        <div class="seccion">
+            <h2 class="seccion__titulo">Registrar Transacción / Mora</h2>
+            <div class="form-grid">
+                <div class="form-grupo">
+                    <label for="tra-prestamo">ID Préstamo</label>
+                    <input type="number" id="tra-prestamo" placeholder="ID del préstamo">
+                </div>
+                <div class="form-grupo">
+                    <label for="tra-mora">Mora ($)</label>
+                    <input type="number" id="tra-mora" min="0" step="0.01" placeholder="0.00">
+                </div>
+                <div class="form-grupo" style="grid-column: 1 / -1;">
+                    <label for="tra-detalle">Detalle</label>
+                    <textarea id="tra-detalle" rows="2" placeholder="Descripción de la transacción..."></textarea>
+                </div>
+            </div>
+            <div class="form-acciones">
+                <button class="btn btn--primario" id="btn-guardar-transaccion">Registrar Transacción</button>
+                <button class="btn btn--secundario" id="btn-limpiar-transaccion">Limpiar</button>
+            </div>
+        </div>
+
+        <!-- Tabla -->
+        <!-- TODO (Backend): GET /api/transacciones -->
+        <div class="seccion">
+            <h2 class="seccion__titulo">Historial de Transacciones</h2>
+            <table class="tabla">
+                <thead>
+                    <tr>
+                        <th>#</th><th>ID Préstamo</th><th>Registrado Por</th>
+                        <th>Mora</th><th>Fecha</th><th>Detalle</th>
+                    </tr>
+                </thead>
+                <tbody id="tabla-transacciones">
+                    <!-- transacciones.js inserta filas aquí -->
+                </tbody>
+            </table>
+        </div>
+    </main>
+
+</div>
+<script type="module" src="js/transacciones.js"></script>
+</body>
+</html>

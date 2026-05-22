@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Préstamos - Biblioteca</title>
+    <link rel="stylesheet" href="css/main.css">
+</head>
+<body>
+<div class="layout">
+
+<aside id="sidebar" class="sidebar"></aside>
+
+    <main class="contenido-principal">
+        <div class="page-header">
+            <h1 class="page-header__titulo">Gestión de Préstamos</h1>
+            <p class="page-header__subtitulo">Registro y seguimiento de préstamos</p>
+        </div>
+
+        <!-- Formulario -->
+        <!-- TODO (Backend): POST /api/prestamos -->
+        <div class="seccion">
+            <h2 class="seccion__titulo">Registrar Préstamo</h2>
+            <div class="form-grid">
+                <div class="form-grupo">
+                    <label for="pre-estudiante">ID Estudiante</label>
+                    <input type="number" id="pre-estudiante" placeholder="ID del estudiante">
+                </div>
+                <div class="form-grupo">
+                    <label for="pre-libro">ID Libro</label>
+                    <input type="number" id="pre-libro" placeholder="ID del libro">
+                </div>
+                <div class="form-grupo">
+                    <label for="pre-fecha">Fecha Máx. Devolución</label>
+                    <input type="date" id="pre-fecha">
+                </div>
+            </div>
+            <div class="form-acciones">
+                <button class="btn btn--primario" id="btn-guardar-prestamo">Registrar Préstamo</button>
+                <button class="btn btn--secundario" id="btn-limpiar-prestamo">Limpiar</button>
+            </div>
+        </div>
+
+        <!-- Tabla -->
+        <!-- TODO (Backend): GET /api/prestamos -->
+        <div class="seccion">
+            <h2 class="seccion__titulo">Listado de Préstamos</h2>
+            <table class="tabla">
+                <thead>
+                    <tr>
+                        <th>#</th><th>Estudiante</th><th>Libro</th><th>Atendido Por</th>
+                        <th>Fecha Salida</th><th>Máx. Devolución</th><th>Entrega</th><th>Estado</th>
+                    </tr>
+                </thead>
+                <tbody id="tabla-prestamos">
+                    <!-- prestamos.js inserta filas aquí -->
+                </tbody>
+            </table>
+        </div>
+    </main>
+
+</div>
+<script type="module" src="js/prestamos.js"></script>
+</body>
+</html>

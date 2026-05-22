@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Estudiantes - Biblioteca</title>
+    <link rel="stylesheet" href="css/main.css">
+</head>
+<body>
+<div class="layout">
+
+<aside id="sidebar" class="sidebar"></aside>
+
+    <main class="contenido-principal">
+        <div class="page-header">
+            <h1 class="page-header__titulo">Gestión de Estudiantes</h1>
+            <p class="page-header__subtitulo">Registro y control de alumnos</p>
+        </div>
+
+        <!-- Formulario -->
+        <!-- TODO (Backend): POST /api/estudiantes -->
+        <div class="seccion">
+            <h2 class="seccion__titulo">Registrar Nuevo Estudiante</h2>
+            <div class="form-grid">
+                <div class="form-grupo">
+                    <label for="est-nombre">Nombre</label>
+                    <input type="text" id="est-nombre" placeholder="Nombre">
+                </div>
+                <div class="form-grupo">
+                    <label for="est-apellido">Apellido</label>
+                    <input type="text" id="est-apellido" placeholder="Apellido">
+                </div>
+                <div class="form-grupo">
+                    <label for="est-genero">Género</label>
+                    <select id="est-genero">
+                        <option value="">— Seleccionar —</option>
+                        <option value="M">Masculino</option>
+                        <option value="F">Femenino</option>
+                    </select>
+                </div>
+                <div class="form-grupo">
+                    <label for="est-edad">Edad</label>
+                    <input type="number" id="est-edad" min="15" max="60" placeholder="Ej: 20">
+                </div>
+                <div class="form-grupo">
+                    <label for="est-email">Email</label>
+                    <input type="email" id="est-email" placeholder="correo@ejemplo.com">
+                </div>
+                <div class="form-grupo">
+                    <label for="est-clave">Clave de Acceso</label>
+                    <input type="text" id="est-clave" placeholder="Clave del alumno">
+                </div>
+            </div>
+            <div class="form-acciones">
+                <button class="btn btn--primario" id="btn-guardar-estudiante">Guardar Estudiante</button>
+                <button class="btn btn--secundario" id="btn-limpiar-estudiante">Limpiar</button>
+            </div>
+        </div>
+
+        <!-- Tabla -->
+        <!-- TODO (Backend): GET /api/estudiantes -->
+        <div class="seccion">
+            <h2 class="seccion__titulo">Listado de Estudiantes</h2>
+            <table class="tabla">
+                <thead>
+                    <tr>
+                        <th>#</th><th>Nombre</th><th>Apellido</th>
+                        <th>Género</th><th>Edad</th><th>Email</th>
+                    </tr>
+                </thead>
+                <tbody id="tabla-estudiantes">
+                    <!-- estudiantes.js inserta filas aquí -->
+                </tbody>
+            </table>
+        </div>
+    </main>
+
+</div>
+<script type="module" src="js/estudiantes.js"></script>
+</body>
+</html>
