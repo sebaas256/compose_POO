@@ -21,25 +21,28 @@
    ------------------------------------------------------------- */
 :root {
     /* Colores principales */
-    --color-sidebar-bg:     #1e2a38;
+    --color-sidebar-bg:     #263f46;
     --color-sidebar-texto:  #b0bec5;
-    --color-activo-bg:      #3498db;
-    --color-activo-borde:   #5dade2;
+    --color-activo-bg:      #263f46;
+    --color-activo-borde:   #fbd46b;
 
     /* Colores de fondo */
-    --color-fondo-app:      #f4f6f9;
-    --color-fondo-card:     #ffffff;
+    --color-fondo-app:      #1b2c33;
+    --color-fondo-card:     #263f46;
 
     /* Colores de texto */
-    --color-texto-principal: #1e2a38;
-    --color-texto-secundario: #7f8c8d;
-    --color-texto-tabla:     #34495e;
+    --color-texto-principal: #ffffff;
+    --color-texto-secundario: #b5cacc;
+    --color-texto-tabla:     #ffffff;
 
     /* Colores de estado */
     --color-verde:   #27ae60;
     --color-rojo:    #e74c3c;
     --color-azul:    #3498db;
     --color-amarillo: #f39c12;
+
+    /* Colores de nuestra paleta personalizada (color de botón) */
+    --color-verde-claro: #e9e8c9; 
 
     /* Badges */
     --badge-verde-bg:    #eafaf1;  --badge-verde-txt:    #1e8449;
@@ -204,7 +207,7 @@ body {
 }
 
 .sidebar__footer strong {
-    color: var(--color-azul);
+    color: var(--color-texto-principal);
 }
 
 
@@ -242,7 +245,7 @@ body {
     background-color: var(--color-fondo-card);
     border-radius: var(--radio-card);
     padding: 20px 24px;
-    border-left: 4px solid var(--color-azul);
+    border-left: 4px solid var(--color-verde-claro);
     box-shadow: var(--sombra-card);
 }
 
@@ -300,7 +303,7 @@ body {
 .tabla thead th {
     text-align: left;
     font-weight: 600;
-    color: #2c3e50;
+    color: #ffffff;
     padding: 10px 14px;
     border-bottom: 2px solid var(--borde-suave);
     font-size: var(--texto-sm);
@@ -317,7 +320,7 @@ body {
 }
 
 .tabla tbody tr:hover td {
-    background-color: #f8f9fa;
+    background-color: #1b2c33;
 }
 
 
@@ -356,7 +359,7 @@ body {
 .form-grupo label {
     font-size: 0.85rem;
     font-weight: 600;
-    color: #34495e;
+    color: #ffffff;
 }
 
 .form-grupo input,
@@ -409,10 +412,11 @@ body {
 .btn:active { transform: scale(0.98); }
 
 /* Variantes de color */
-.btn--primario   { background-color: var(--color-azul);   color: #fff; }
+.btn--primario   { background-color: var(--color-verde-claro);   color: #263f46; }
 .btn--exito      { background-color: var(--color-verde);  color: #fff; }
 .btn--peligro    { background-color: var(--color-rojo);   color: #fff; }
 .btn--secundario { background-color: #ecf0f1;             color: #2c3e50; }
 
 /* Tamaño pequeño para tablas */
 .btn--sm { padding: 5px 12px; font-size: var(--texto-sm); }
+
