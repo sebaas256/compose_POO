@@ -21,19 +21,19 @@ import jakarta.persistence.Table;
 public class Usuario {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "IDUsuario")
+    @Column(name = "idusuario")
     private Integer idUsuario;
     
-    @Column(name = "NombreCompleto")
+    @Column(name = "nombre_completo")
     private String nombreCompleto;
     
-    @Column(name = "NombreUsuario")
+    @Column(name = "nombre_usuario")
     private String nombreUsuario;
     
-    @Column(name = "Password")
+    @Column(name = "password")
     private String password;
     
-    @Column(name = "Rol")
+    @Column(name = "rol")
     private String rol;
 
     public Integer getIDUsuario() {
