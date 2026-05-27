@@ -5,30 +5,27 @@ import './sidebar.js';
 import { getLibros, crearLibro } from './api.js';
 
 // ── Datos de ejemplo (eliminar cuando el backend esté listo) ──
-const EJEMPLO = [
-    { id: 1, codigo: 'LIB-001', titulo: 'Java a Fondo',    autor: 'Sznajdleder', editorial: 'Alfaomega', genero: 'Tecnología', stock: 5, disponible: true  },
-    { id: 2, codigo: 'LIB-002', titulo: 'Clean Code',      autor: 'R. C. Martin', editorial: 'Prentice', genero: 'Tecnología', stock: 3, disponible: true  },
-    { id: 3, codigo: 'LIB-003', titulo: 'CCNA 200-301',    autor: 'Wendell Odom', editorial: 'Cisco',    genero: 'Redes',      stock: 0, disponible: false },
-    { id: 4, codigo: 'LIB-004', titulo: 'Cuentos de Barro',autor: 'Salarrué',     editorial: 'Clásicos', genero: 'Literatura', stock: 8, disponible: true  },
-];
+
 
 async function cargarTabla() {
     let lista;
     try {
         lista = await getLibros();
+        console.log("lista cargada");  
     } catch {
         lista = EJEMPLO;
+        console.log("xd");  
     }
     document.getElementById('tabla-libros').innerHTML = lista.map(l => `
         <tr>
-            <td>${l.id}</td>
+            <td>${l.idLibro}</td>
             <td>${l.codigo}</td>
             <td>${l.titulo}</td>
             <td>${l.autor}</td>
             <td>${l.editorial}</td>
-            <td>${l.genero}</td>
+            <td>${l.generoLibro}</td>
             <td>${l.stock}</td>
-            <td>${l.disponible
+            <td>${l.disponibilidad
                 ? '<span class="badge badge--verde">Disponible</span>'
                 : '<span class="badge badge--rojo">Sin stock</span>'}</td>
         </tr>

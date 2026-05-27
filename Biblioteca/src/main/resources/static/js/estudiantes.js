@@ -20,11 +20,11 @@ async function cargarTabla() {
     }
     document.getElementById('tabla-estudiantes').innerHTML = lista.map(e => `
         <tr>
-            <td>${e.id}</td>
+            <td>${e.idEstudiante}</td>
             <td>${e.nombre}</td>
             <td>${e.apellido}</td>
             <td>${e.genero === 'M' ? 'Masculino' : 'Femenino'}</td>
-            <td>${e.edad}</td>
+            <td>${e.Edad}</td>
             <td>${e.email}</td>
         </tr>
     `).join('');
