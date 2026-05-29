@@ -12,13 +12,16 @@ package com.biblioteca.backend.controller;
 import com.biblioteca.backend.dto.EstudianteDTO;
 import com.biblioteca.backend.dto.EstudianteRegistroDTO;
 import com.biblioteca.backend.model.Estudiante;
-import com.biblioteca.backend.repository.EstudianteRepository;
+import com.biblioteca.backend.service.EstudianteService;
 import java.util.ArrayList;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -29,12 +32,12 @@ import org.springframework.web.bind.annotation.RestController;
 public class EstudianteController {
     
     @Autowired //permite que spring inyecte automaticamente la instancia del repo para hablar con la bd
-    private EstudianteRepository estudianteRepository;
+    private EstudianteService estudianteService;
     
     @GetMapping //responde a peticiones GET
     public List<EstudianteDTO> obtenerEstudiantes(){
         //se obtienen los datos crudos de sql server
-        List<Estudiante> listaEntidades = estudianteRepository.findAll();
+        List<Estudiante> listaEntidades = estudianteService.listarEstudiantes();
         //preparar la lista limpia para el front
         List<EstudianteDTO> listaDTO = new ArrayList<>();
         //copiar de la Entidad al DTO omitiendo ClaveAcceso
@@ -64,8 +67,20 @@ public class EstudianteController {
         nuevoEstudiante.setEmail(datosRegistro.getEmail());
         nuevoEstudiante.setClaveAcceso(datosRegistro.getClaveAcceso());
         //se inserta en sql server
-        estudianteRepository.save(nuevoEstudiante);
+        estudianteService.guardarEstudiante(nuevoEstudiante);
         
         return "{\"Mensaje\":  \" EStudiante registrado con exito\"}";
+    }
+    
+    @DeleteMapping("/{id}")
+    public String eliminarEstudiante(@PathVariable int id){
+        boolean eliminado = estudianteService.eliminarEstudiante(id);
+        return eliminado ? "Eliminado con exito" : "No encontrado"; // utilizamos operador ternario para devolver un string si es true o false
+    }
+    
+    @PutMapping("/{id}")
+    public String actualizarEstudiante(@PathVariable int id, @RequestBody Estudiante estudiante){
+        Estudiante actualizado = estudianteService.modificarEstudiante(id, estudiante);
+        return (actualizado != null) ? "Actualizado con exito":"Error al actualizar";
     }
 }

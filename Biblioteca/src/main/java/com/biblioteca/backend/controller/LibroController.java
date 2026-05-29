@@ -46,7 +46,7 @@ public class LibroController {
     @DeleteMapping("/{id}")
     public String eliminarLibro(@PathVariable int id) {
         boolean eliminado = libroService.eliminarLibro(id);
-        if (eliminado = true) {
+        if (eliminado == true) {
             return "El libro " + id + " fue eliminado con exito";
         } else {
             return "El libro no se pudo eliminar, compruebe si el libro existe";
