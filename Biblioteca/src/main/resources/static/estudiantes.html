@@ -17,11 +17,17 @@
             <p class="page-header__subtitulo">Registro y control de alumnos</p>
         </div>
 
-        <!-- Formulario -->
-        <!-- TODO (Backend): POST /api/estudiantes -->
+        <!-- Formularios btns -->
         <div class="seccion">
-            <h2 class="seccion__titulo">Registrar Nuevo Estudiante</h2>
-            <div class="form-grid">
+<div class="seccion__titulo"; style="display:flex; gap:10px; margin-bottom:20px;">
+    <button class="btn btn--primario"   id="btn-registrar">Registrar</button>
+    <button class="btn btn--secundario" id="btn-modificar">Modificar</button>
+    <button class="btn btn--peligro"    id="btn-eliminar">Eliminar</button>
+</div>
+        <!-- Registrar estudiante formulario -->
+<div id="form-registrar">
+    <h2 class="seccion__titulo" id="titulo-formulario">Registrar Nuevo Estudiante</h2>            
+                <div class="form-grid">
                 <div class="form-grupo">
                     <label for="est-nombre">Nombre</label>
                     <input type="text" id="est-nombre" placeholder="Nombre">
@@ -45,17 +51,76 @@
                 <div class="form-grupo">
                     <label for="est-email">Email</label>
                     <input type="email" id="est-email" placeholder="correo@ejemplo.com">
-                </div>
+               
+                
                 <div class="form-grupo">
                     <label for="est-clave">Clave de Acceso</label>
                     <input type="text" id="est-clave" placeholder="Clave del alumno">
                 </div>
             </div>
+        </div>
             <div class="form-acciones">
                 <button class="btn btn--primario" id="btn-guardar-estudiante">Guardar Estudiante</button>
                 <button class="btn btn--secundario" id="btn-limpiar-estudiante">Limpiar</button>
             </div>
         </div>
+    
+
+        <!-- Eliminar formulario -->
+         <div id="form-eliminar" class="form-contenedor" style="display:none;">
+          <h2 class="seccion__titulo"> Eliminar Estudiante</h2>
+        <div class="form-grid">
+        <div class="form-grupo">
+            <label>ID Estudiante a eliminar</label>
+            <input type="number" id="elim-id" placeholder="ID del estudiante">
+        </div>
+    </div>
+    <div class="form-acciones">
+        <button class="btn btn--peligro" id="btn-confirmar-eliminar">Confirmar Eliminar</button>
+    </div>
+</div>
+     
+        <!-- Modificar formulario -->
+         <div id="form-modificar" class="form-contenedor" style="display:none;">
+        <h2 class="seccion__titulo" >Modificar Estudiante</h2>
+    <div class="form-grid">
+        <div class="form-grupo">
+            <label>ID Estudiante</label>
+            <input type="number" id="mod-id" placeholder="ID a modificar">
+        </div>
+        <div class="form-grupo">
+            <label>Nombre</label>
+            <input type="text" id="mod-nombre" placeholder="Nombre">
+        </div>
+        <div class="form-grupo">
+            <label>Apellido</label>
+            <input type="text" id="mod-apellido" placeholder="Apellido">
+        </div>
+        <div class="form-grupo">
+            <label>Género</label>
+            <select id="mod-genero">
+                <option value="">— Seleccionar —</option>
+                <option value="Masculino">Masculino</option>
+                <option value="Femenino">Femenino</option>
+            </select>
+        </div>
+        <div class="form-grupo">
+            <label>Edad</label>
+            <input type="number" id="mod-edad" placeholder="Edad">
+        </div>
+        <div class="form-grupo">
+            <label>Email</label>
+            <input type="email" id="mod-email" placeholder="correo@ejemplo.com">
+        </div>
+    </div>
+    <div class="form-acciones">
+        <button class="btn btn--primario" id="btn-guardar-modificar">Guardar Cambios</button>
+        <button class="btn btn--secundario" id="btn-limpiar-modificar">Limpiar</button>
+    </div>
+</div>
+</div>
+
+
 
         <!-- Tabla -->
         <!-- TODO (Backend): GET /api/estudiantes -->

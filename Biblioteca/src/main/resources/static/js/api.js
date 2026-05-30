@@ -68,6 +68,23 @@ export async function crearEstudiante(data) {
     });
     return res.json();
 }
+// TODO (Backend): DELETE /api/estudiantes/{id}
+export async function eliminarEstudiante(id) {
+    const res = await fetch(`${BASE_URL}/estudiantes/${id}`, {
+        method: 'DELETE'
+    });
+    return res.text();
+}
+
+// PUT /api/estudiantes/{id}
+export async function modificarEstudiante(id, data) {
+    const res = await fetch(`${BASE_URL}/estudiantes/${id}`, { //
+        method: 'PUT',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(data)
+    });
+    return res.text();
+}
 
 // ── Préstamos ─────────────────────────────────────────────────
 // TODO (Backend): GET /api/prestamos
