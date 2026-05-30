@@ -37,7 +37,7 @@ async function cargarTabla() {
             <td>${e.idEstudiante}</td>
             <td>${e.nombre}</td>
             <td>${e.apellido}</td>
-            <td>${e.genero === 'M' ? 'Masculino' : 'Femenino'}</td>
+            <td>${e.genero}</td>            
             <td>${e.Edad}</td>
             <td>${e.email}</td>
         </tr>
@@ -71,6 +71,7 @@ document.getElementById('btn-limpiar-estudiante').addEventListener('click', () =
 });
 
 //btn eliminar estudiante
+// no se borra por relacion con llaves foraneas a prestamos, 
 document.getElementById('btn-confirmar-eliminar').addEventListener('click', async () => {
     const id = document.getElementById('elim-id').value;
     if (!id) return alert('Ingresa un ID.');
@@ -94,6 +95,7 @@ document.getElementById('btn-guardar-modificar').addEventListener('click', async
         genero:   document.getElementById('mod-genero').value,
         edad:     parseInt(document.getElementById('mod-edad').value) || 0,
         email:    document.getElementById('mod-email').value.trim(),
+        claveAcceso: document.getElementById('mod-clave').value.trim(),
     };
     try {
         await modificarEstudiante(id, data);
