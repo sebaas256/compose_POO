@@ -36,11 +36,11 @@ public class Usuario {
     @Column(name = "rol")
     private String rol;
 
-    public Integer getIDUsuario() {
+    public Integer getIdUsuario() {
         return idUsuario;
     }
 
-    public void setIDUsuario(Integer IDUsuario) {
+    public void setIdUsuario(Integer IDUsuario) {
         this.idUsuario = IDUsuario;
     }
 
