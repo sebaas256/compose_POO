@@ -11,16 +11,27 @@
 
 <aside id="sidebar" class="sidebar"></aside>
 
+
+
     <main class="contenido-principal">
         <div class="page-header">
             <h1 class="page-header__titulo">Gestión de Libros</h1>
             <p class="page-header__subtitulo">Catálogo de ejemplares disponibles</p>
         </div>
 
+
+    <div class="seccion">
+        <!-- Formularios btns -->
+    <div class="seccion__titulo"; style="display:flex; gap:10px; margin-bottom:20px;">
+        <button class="btn btn--primario"   id="btn-registrar">Registrar</button>
+        <button class="btn btn--secundario" id="btn-modificar">Modificar</button>
+        <button class="btn btn--peligro"    id="btn-eliminar">Eliminar</button>
+    </div>
         <!-- Formulario -->
         <!-- TODO (Backend): POST /api/libros -->
-        <div class="seccion">
-            <h2 class="seccion__titulo">Registrar Nuevo Libro</h2>
+       
+       <div id="form-registrar" class="form-contenedor">
+            <h2 class="seccion__titulo" id="titulo-formulario">Registrar Nuevo Libro</h2>
             <div class="form-grid">
                 <div class="form-grupo">
                     <label for="lib-codigo">Código</label>
@@ -42,24 +53,108 @@
                     <label for="lib-genero">Género</label>
                     <select id="lib-genero">
                         <option value="">— Seleccionar —</option>
-                        <option>Tecnología</option>
-                        <option>Literatura</option>
-                        <option>Ciencias</option>
-                        <option>Redes</option>
-                        <option>Matemáticas</option>
-                        <option>Historia</option>
+                        <option value="Tecnología">Tecnología</option>
+                        <option value="Literatura">Literatura</option>
+                        <option value="Ciencias">Ciencias</option>
+                        <option value="Redes">Redes</option>
+                        <option value="Matemáticas">Matemáticas</option>
+                        <option value="Historia">Historia</option>
                     </select>
                 </div>
+
                 <div class="form-grupo">
                     <label for="lib-stock">Stock</label>
                     <input type="number" id="lib-stock" min="0" placeholder="0">
                 </div>
+            <div class="form-grupo">
+                <label for="lib-disponibilidad">Disponible</label>
+                <label class="switch">  
+                    <input type="checkbox" id="lib-disponibilidad">
+                    <span class="slider"></span>
+                </label>
             </div>
+            </div>
+       
             <div class="form-acciones">
                 <button class="btn btn--primario" id="btn-guardar-libro">Guardar Libro</button>
                 <button class="btn btn--secundario" id="btn-limpiar-libro">Limpiar</button>
             </div>
         </div>
+                <!-- Eliminar formulario -->
+         <div id="form-eliminar" class="form-contenedor" style="display:none;">
+          <h2 class="seccion__titulo"> Eliminar Libro</h2>
+        <div class="form-grid">
+        <div class="form-grupo">
+            <label>ID Libro a eliminar</label>
+            <input type="number" id="elim-id" placeholder="ID del libro">
+        </div>
+    </div>
+    <div class="form-acciones">
+        <button class="btn btn--peligro" id="btn-confirmar-eliminar">Confirmar Eliminar</button>
+    </div>
+</div>
+     
+        <!-- Modificar formulario -->
+         <div id="form-modificar" class="form-contenedor" style="display:none;">
+        <h2 class="seccion__titulo" >Modificar Libro</h2>
+    <div class="form-grid">
+        <div class="form-grupo">
+            <label>ID Libro</label>
+            <input type="number" id="mod-id" placeholder="ID a modificar">
+        </div>
+ <div class="form-grupo">
+                    <label for="mod-codigo">Código</label>
+                    <input type="text" id="mod-codigo" placeholder="Ej: LIB-005">
+                </div>
+                <div class="form-grupo">
+                    <label for="mod-titulo">Título</label>
+                    <input type="text" id="mod-titulo" placeholder="Título del libro">
+                </div>
+                <div class="form-grupo">
+                    <label for="mod-autor">Autor</label>
+                    <input type="text" id="mod-autor" placeholder="Nombre del autor">
+                </div>
+                <div class="form-grupo">
+                    <label for="mod-editorial">Editorial</label>
+                    <input type="text" id="mod-editorial" placeholder="Editorial">
+                </div>
+                <div class="form-grupo">
+                    <label for="mod-genero">Género</label>
+                    <select id="mod-genero">
+                        <option value="">— Seleccionar —</option>
+                        <option value="Tecnología">Tecnología</option>
+                        <option value="Literatura">Literatura</option>
+                        <option value="Ciencias">Ciencias</option>
+                        <option value="Redes">Redes</option>
+                        <option value="Matemáticas">Matemáticas</option>
+                        <option value="Historia">Historia</option>
+                    </select>
+                </div>
+
+                <div class="form-grupo">
+                    <label for="mod-stock">Stock</label>
+                    <input type="number" id="mod-stock" min="0" placeholder="0">
+                </div>
+            <div class="form-grupo">
+                <label for="mod-disponibilidad">Disponible</label>
+                <label class="switch">  
+                    <input type="checkbox" id="mod-disponibilidad">
+                    <span class="slider"></span>
+                </label>
+            </div>
+            </div>
+       
+    <div class="form-acciones">
+        <button class="btn btn--primario" id="btn-guardar-modificar">Guardar Cambios</button>
+        <button class="btn btn--secundario" id="btn-limpiar-modificar">Limpiar</button>
+    </div>
+    </div>
+</div>
+
+
+
+
+
 
         <!-- Tabla -->
         <!-- TODO (Backend): GET /api/libros -->

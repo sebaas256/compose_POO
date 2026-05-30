@@ -50,7 +50,21 @@ export async function crearLibro(data) {
     });
     return res.json();
 }
+// delete /api/libros/{id}
+// TODO (Backend): DELETE /api/libros/{id}
+export async function eliminarLibro(id) {
+    const res = await fetch(`${BASE_URL}/libros/${id}`, { method: 'DELETE' });
+    return res.text();
+}
 
+export async function modificarLibro(id, data) {
+    const res = await fetch(`${BASE_URL}/libros/${id}`, {
+        method: 'PUT', //pPUT viene de "update" y se usa para modificar recursos existentes que vienen de libros/{id}
+        headers: { 'Content-Type': 'application/json' }, //
+        body: JSON.stringify(data)
+    });
+    return res.text();
+}
 // ── Estudiantes ───────────────────────────────────────────────
 // TODO (Backend): GET /api/estudiantes
 export async function getEstudiantes() {

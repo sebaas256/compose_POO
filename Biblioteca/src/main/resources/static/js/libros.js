@@ -2,10 +2,20 @@
 // libros.js — Gestión de Libros
 // ============================================================
 import './sidebar.js';
-import { getLibros, crearLibro } from './api.js';
+import { getLibros, crearLibro, eliminarLibro, modificarLibro } from './api.js'; //api.js es el archivo donde se hacen las llamadas al backend, se importa para usar sus funciones
 
-// ── Datos de ejemplo (eliminar cuando el backend esté listo) ──
+const Titulo = document.getElementById('titulo-formulario');
+const FormRegistrar = document.getElementById('form-registrar');
+const FormEliminar = document.getElementById('form-eliminar');
+const FormModificar = document.getElementById('form-modificar');
 
+// ── Datos de ejemplo
+const EJEMPLO = [
+    { idLibro: 1, codigo: 'LB001', titulo: 'El Quijote', autor: 'Miguel de Cervantes', editorial: 'Editorial A', generoLibro: 'Novela', stock: 5, disponibilidad: true },
+    { idLibro: 2, codigo: 'LB002', titulo: 'Cien Años de Soledad', autor: 'Gabriel García Márquez', editorial: 'Editorial B', generoLibro: 'Realismo Mágico', stock: 0, disponibilidad: false },
+    { idLibro: 3, codigo: 'LB003', titulo: 'La Sombra del Viento', autor: 'Carlos Ruiz Zafón', editorial: 'Editorial C', generoLibro: 'Misterio', stock: 3, disponibilidad: true }
+];
+// ───────────────────────────────────────────────────────────────
 
 async function cargarTabla() {
     let lista;
@@ -41,6 +51,7 @@ document.getElementById('btn-guardar-libro').addEventListener('click', async () 
         editorial:   document.getElementById('lib-editorial').value.trim(),
         generoLibro: document.getElementById('lib-genero').value,
         stock:       parseInt(document.getElementById('lib-stock').value) || 0,
+        disponibilidad: document.getElementById('lib-disponibilidad').checked
     };
     if (!data.codigo || !data.titulo) return alert('Código y Título son requeridos.');
     try {
@@ -58,3 +69,65 @@ document.getElementById('btn-limpiar-libro').addEventListener('click', () => {
 });
 
 cargarTabla();
+
+
+//botones de modificar y eliminar libros (sin funcionalidad aún)
+
+        document.getElementById('btn-confirmar-eliminar').addEventListener('click', async () => {
+            const id = document.getElementById('elim-id').value;
+            if (!id) return alert('Ingresa un ID.');
+            if (!confirm(`¿Eliminar libro ${id}?`)) return;
+            try {
+                await eliminarLibro(id);
+                alert('Eliminado correctamente.');
+                cargarTabla();
+            } catch {
+                alert('Error al eliminar.');
+            }
+        });
+
+        //btn modificar libro
+        document.getElementById('btn-guardar-modificar').addEventListener('click', async () => {
+            const id = document.getElementById('mod-id').value;
+            if (!id) return alert('Ingresa un ID.');
+            const data = {
+                codigo:      document.getElementById('mod-codigo').value.trim(),
+                titulo:      document.getElementById('mod-titulo').value.trim(),
+                autor:       document.getElementById('mod-autor').value.trim(),
+                editorial:   document.getElementById('mod-editorial').value.trim(),
+                generoLibro: document.getElementById('mod-genero').value,
+                stock:       parseInt(document.getElementById('mod-stock').value) || 0,
+                disponibilidad: document.getElementById('mod-disponibilidad').checked
+            };
+            try {
+                await modificarLibro(id, data);
+                alert('Modificado correctamente.');
+                cargarTabla();
+            } catch {
+                alert('Error al modificar.');
+            }
+        });
+
+
+        //cual es el formulario a mostrar
+        function mostrarFormulario(cual) {
+            FormRegistrar.style.display = 'none';
+            FormModificar.style.display = 'none';
+            FormEliminar.style.display  = 'none';
+
+            if (cual === 'registrar') {
+                FormRegistrar.style.display = 'block'; //block mostrar formulario
+                Titulo.textContent = 'Registrar Nuevo Libro';
+            } else if (cual === 'modificar') {
+                FormModificar.style.display = 'block';
+                Titulo.textContent = 'Modificar Libro';
+            } else if (cual === 'eliminar') {
+                FormEliminar.style.display  = 'block';
+                Titulo.textContent = 'Eliminar Libro';
+            }
+        }
+
+        // Vincular botones
+        document.getElementById('btn-registrar').addEventListener('click', () => mostrarFormulario('registrar'));
+        document.getElementById('btn-eliminar').addEventListener('click',  () => mostrarFormulario('eliminar'));
+        document.getElementById('btn-modificar').addEventListener('click', () => mostrarFormulario('modificar'));

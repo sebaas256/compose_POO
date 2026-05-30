@@ -420,3 +420,58 @@ body {
 /* Tamaño pequeño para tablas */
 .btn--sm { padding: 5px 12px; font-size: var(--texto-sm); }
 
+/* ==========================================================
+   12. SWITCH 
+   ========================================================== */
+
+/* 1. El contenedor del switch (El tamaño de la cajita) */
+.switch {
+  position: relative;
+  display: inline-block;
+  width: 60px;          /* --- ANCHO DEL SWITCH --- */
+  height: 34px;         /* --- ALTO DEL SWITCH --- */
+}
+
+/* 2. Ocultar el checkbox feo que viene por defecto en el navegador */
+.switch input { 
+  opacity: 0;
+  width: 0;
+  height: 0;
+}
+
+/* 3. El fondo del switch (El canal por donde se mueve el círculo) */
+.slider {
+  position: absolute;
+  cursor: pointer;
+  top: 0; left: 0; right: 0; bottom: 0;
+  background-color: #a09f9f;  /* --- COLOR CUANDO ESTÁ APAGADO (OFF) --- */
+  transition: .4s;         /* Velocidad de la animación al cambiar */
+  border-radius: 34px;     /* Hace el fondo completamente redondo */
+}
+
+/* 4. El círculo de adentro (El botoncito que se mueve) */
+.slider:before {
+  position: absolute;
+  content: "";
+  height: 26px;            /* --- ALTO DEL CÍRCULO --- */
+  width: 26px;             /* --- ANCHO DEL CÍRCULO --- */
+  left: 4px;               /* Margen izquierdo interno */
+  bottom: 4px;             /* Margen inferior interno */
+  background-color: white; /* --- COLOR DEL CÍRCULO --- */
+  transition: .4s;         /* Velocidad de movimiento del círculo */
+  border-radius: 50%;      /* Hace que sea un círculo perfecto */
+}
+
+/* ==========================================================
+   ESTADOS ACTIVOS (Cuando el usuario hace clic y se enciende)
+   ========================================================== */
+
+/* 5. color de fondo cuando está encendido (ON) */
+input:checked + .slider {
+  background-color: var(--color-verde); /* --- /ON --- */
+}
+
+/* 6. Mover el círculo hacia la derecha cuando está encendido (ON) */
+input:checked + .slider:before {
+  transform: translateX(26px); /* --- ANCHO DEL SWITCH --- */
+}

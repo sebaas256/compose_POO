@@ -12,9 +12,11 @@ const FormEliminar = document.getElementById('form-eliminar');
 const FormModificar = document.getElementById('form-modificar');
 const Titulo = document.getElementById('titulo-formulario'); 
 
+
+//backend no respondia
 console.log(document.getElementById('btn-confirmar-eliminar'));
 console.log(document.getElementById('btn-guardar-modificar'));
-console.log('estudiantes.js cargado');
+console.log('estudiantes.js cagado');
 // ============================================================
 
 // Datos de ejemplo para mostrar en la tabla si el backend no responde
