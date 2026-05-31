@@ -23,10 +23,18 @@ public class PrestamoService {
 
     public Prestamo guardar(Prestamo prestamo) {
         if (prestamo.getIdPrestamo() == null) {
-            prestamo.setEstado("Activo");
+            prestamo.setEstado("activo");
         }
         return prestamoRepository.save(prestamo);
     }
+
+    public Prestamo modificarPrestamo(int id, Prestamo prestamo) {
+    if (prestamoRepository.existsById(id)) {
+        prestamo.setIdPrestamo(id);
+        return prestamoRepository.save(prestamo);
+    }
+    return null;
+}
 
     public void eliminar(Integer id) {
         prestamoRepository.deleteById(id);

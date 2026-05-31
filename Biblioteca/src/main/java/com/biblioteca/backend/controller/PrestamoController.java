@@ -77,4 +77,13 @@ public class PrestamoController {
         prestamoService.eliminar(id);
         return ResponseEntity.noContent().build();
     }
+
+    @PutMapping("/{id}")
+public ResponseEntity<?> modificar(@PathVariable int id, @RequestBody Prestamo prestamo) {
+    Prestamo modificado = prestamoService.modificarPrestamo(id, prestamo);
+    if (modificado != null) {
+        return ResponseEntity.ok(modificado);
+    }
+    return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Préstamo no encontrado");
+}
 }
