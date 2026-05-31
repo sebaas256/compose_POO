@@ -12,12 +12,14 @@ import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.CrossOrigin;
 
 /**
  * @author xd
  */
 @RestController
 @RequestMapping("/api/transaccion")
+@CrossOrigin(origins = "*") //estenigga
 public class TransaccionController {
 
     @Autowired

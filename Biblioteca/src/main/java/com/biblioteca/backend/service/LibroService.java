@@ -44,6 +44,7 @@ public class LibroService {
     public Libro modificarLibro(int id, Libro libro) {
         if (libroRepository.existsById(id)) {
             libro.setIdLibro(id);
+            libro.setDisponibilidad(libro.getStock() > 0); // actualiza el estado según el stock
             return libroRepository.save(libro);
         }
         return null;

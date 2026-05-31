@@ -4,10 +4,10 @@
 import './sidebar.js';
 import { getTransacciones, crearTransaccion } from './api.js';
 
-const EJEMPLO = [
-    { id: 1, prestamo: 2, atendidoPor: 'admin', mora: 3.75, fecha: '2026-05-21', detalle: 'Cobro de multa por entrega tardía' },
-    { id: 2, prestamo: 1, atendidoPor: 'admin', mora: 0.00, fecha: '2026-05-14', detalle: 'Emisión de ticket - Sin cargos'    },
-];
+// const EJEMPLO = [
+//     { id: 1, prestamo: 2, atendidoPor: 'admin', mora: 3.75, fecha: '2026-05-21', detalle: 'Cobro de multa por entrega tardía' },
+//     { id: 2, prestamo: 1, atendidoPor: 'admin', mora: 0.00, fecha: '2026-05-14', detalle: 'Emisión de ticket - Sin cargos'    },
+// ];
 
 async function cargarTabla() {
     let lista;
@@ -16,14 +16,17 @@ async function cargarTabla() {
     } catch {
         lista = EJEMPLO;
     }
+    //libro? estudiante? usuario? prestamo? —> para mostrar en tabla ? signifiac que puede ser null, y el ?? '—' es para mostrar un guion si es null
+    //to fixed(2) para mostrar 2 decimales en la mora
     document.getElementById('tabla-transacciones').innerHTML = lista.map(t => `
         <tr>
-            <td>${t.id}</td>
-            <td>${t.prestamo}</td>
-            <td>${t.atendidoPor}</td>
-            <td>$${t.mora.toFixed(2)}</td>
-            <td>${t.fecha}</td>
-            <td>${t.detalle}</td>
+            <td>${t.IdTransaccion}</td>
+            <td>${t.prestamo?.estudiante?.nombre ?? 'N/A'} ${t.prestamo?.estudiante?.apellido ?? 'N/A'}</td>
+            <td>${t.prestamo?.libro?.titulo ?? 'N/A'}</td> 
+            <td>${t.usuario?.nombreUsuario ?? 'N/A'}</td>            
+            <td>${t.mora.toFixed(2)}</td>
+            <td>${t.fechaTransaccion}</td>
+            <td>${t.detalleTransaccion}</td>
         </tr>
     `).join('');
 }

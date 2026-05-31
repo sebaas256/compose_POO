@@ -35,7 +35,7 @@ async function cargarTabla() {
             <td>${l.editorial}</td>
             <td>${l.generoLibro}</td>
             <td>${l.stock}</td>
-            <td>${l.disponibilidad
+            <td>${l.stock > 0
                 ? '<span class="badge badge--verde">Disponible</span>'
                 : '<span class="badge badge--rojo">Sin stock</span>'}</td>
         </tr>
@@ -51,7 +51,8 @@ document.getElementById('btn-guardar-libro').addEventListener('click', async () 
         editorial:   document.getElementById('lib-editorial').value.trim(),
         generoLibro: document.getElementById('lib-genero').value,
         stock:       parseInt(document.getElementById('lib-stock').value) || 0,
-        disponibilidad: document.getElementById('lib-disponibilidad').checked
+        disponibilidad: parseInt(document.getElementById('lib-stock').value) > 0
+        // disponibilidad: document.getElementById('lib-disponibilidad').checked
     };
     if (!data.codigo || !data.titulo) return alert('Código y Título son requeridos.');
     try {
@@ -97,7 +98,8 @@ cargarTabla();
                 editorial:   document.getElementById('mod-editorial').value.trim(),
                 generoLibro: document.getElementById('mod-genero').value,
                 stock:       parseInt(document.getElementById('mod-stock').value) || 0,
-                disponibilidad: document.getElementById('mod-disponibilidad').checked
+                disponibilidad: parseInt(document.getElementById('mod-stock').value) > 0
+                // disponibilidad: document.getElementById('mod-disponibilidad').checked
             };
             try {
                 await modificarLibro(id, data);

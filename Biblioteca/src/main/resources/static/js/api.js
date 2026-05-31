@@ -121,14 +121,14 @@ export async function crearPrestamo(data) {
 // ── Transacciones ─────────────────────────────────────────────
 // TODO (Backend): GET /api/transacciones
 export async function getTransacciones() {
-    const res = await fetch(`${BASE_URL}/transacciones`);
+    const res = await fetch(`${BASE_URL}/transaccion`);
     return res.json();
 }
 
 // TODO (Backend): POST /api/transacciones
 // Body: { idPrestamo, idUsuario, mora, detalleTransaccion }
 export async function crearTransaccion(data) {
-    const res = await fetch(`${BASE_URL}/transacciones`, {
+    const res = await fetch(`${BASE_URL}/transaccion`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(data)
