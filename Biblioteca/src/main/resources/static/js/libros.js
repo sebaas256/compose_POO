@@ -24,7 +24,7 @@ async function cargarTabla() {
         lista = await getLibros();
         
     } catch {
-        lista = [];
+        lista = EJEMPLO;
     }
 
     if ($.fn.DataTable.isDataTable('#tabla-libros')) {
@@ -48,7 +48,7 @@ async function cargarTabla() {
 
     $('#tabla-libros').DataTable({ pageLength: 10 });
 }
-
+// alerts en guardar libro pero ahora usando mostrar modal
 // ── Guardar libro ─────────────────────────────────────────────
 document.getElementById('btn-guardar-libro').addEventListener('click', async () => {
     const data = {
@@ -59,15 +59,17 @@ document.getElementById('btn-guardar-libro').addEventListener('click', async () 
         generoLibro: document.getElementById('lib-genero').value,
         stock:       parseInt(document.getElementById('lib-stock').value) || 0,
         disponibilidad: parseInt(document.getElementById('lib-stock').value) > 0
-        // disponibilidad: document.getElementById('lib-disponibilidad').checked
     };
-    if (!data.codigo || !data.titulo) return alert('Código y Título son requeridos.');
+    
+    if (!data.codigo || !data.titulo) return mostrarModal('Código y Título son requeridos.');
+    
     try {
-        await crearLibro(data); // TODO: conectar cuando el backend esté listo
-        alert('Libro guardado correctamente.');
+        await crearLibro(data); 
+        mostrarModal('Libro guardado correctamente.');
         cargarTabla();
-    } catch {
-        alert('Backend no disponible aún. El libro no fue guardado.');
+    } catch (error) {
+        // Captura el mensaje exacto enviado desde el backend (ej: "El stock inicial no debe ser menor a 0")
+        mostrarModal(error.message || 'Error al conectar con el servidor. El libro no fue guardado.');
     }
 });
 
@@ -105,28 +107,30 @@ cargarTabla();
             }
         });
 
-        //btn modificar libro
-        document.getElementById('btn-guardar-modificar').addEventListener('click', async () => {
-            const id = document.getElementById('mod-id').value;
-            if (!id) return alert('Ingresa un ID.');
-            const data = {
-                codigo:      document.getElementById('mod-codigo').value.trim(),
-                titulo:      document.getElementById('mod-titulo').value.trim(),
-                autor:       document.getElementById('mod-autor').value.trim(),
-                editorial:   document.getElementById('mod-editorial').value.trim(),
-                generoLibro: document.getElementById('mod-genero').value,
-                stock:       parseInt(document.getElementById('mod-stock').value) || 0,
-                disponibilidad: parseInt(document.getElementById('mod-stock').value) > 0
-                // disponibilidad: document.getElementById('mod-disponibilidad').checked
-            };
-            try {
-                await modificarLibro(id, data);
-                alert('Modificado correctamente.');
-                cargarTabla();
-            } catch {
-                alert('Error al modificar.');
-            }
-        });
+//btn modificar libro
+document.getElementById('btn-guardar-modificar').addEventListener('click', async () => {
+    const id = document.getElementById('mod-id').value;
+    if (!id) return mostrarModal('Ingresa un ID.');
+    
+    const data = {
+        codigo:      document.getElementById('mod-codigo').value.trim(),
+        titulo:      document.getElementById('mod-titulo').value.trim(),
+        autor:       document.getElementById('mod-autor').value.trim(),
+        editorial:   document.getElementById('mod-editorial').value.trim(),
+        generoLibro: document.getElementById('mod-genero').value,
+        stock:       parseInt(document.getElementById('mod-stock').value) || 0,
+        disponibilidad: parseInt(document.getElementById('mod-stock').value) > 0
+    };
+    
+    try {
+        await modificarLibro(id, data);
+        mostrarModal('Modificado correctamente.');
+        cargarTabla();
+    } catch (error) {
+        // Muestra en el modal si el backend rechazó la modificación por datos inválidos
+        mostrarModal(error.message || 'Error al modificar el libro.');
+    }
+});
 
 
         //cual es el formulario a mostrar

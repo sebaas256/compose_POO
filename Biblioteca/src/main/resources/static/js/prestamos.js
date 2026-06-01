@@ -41,7 +41,7 @@ async function cargarTabla() {
         </tr>
     `).join('');
 }
- 
+
 // registrar prestamo
 document.getElementById('btn-guardar-prestamo').addEventListener('click', async () => {
     const usuarioActivo = sessionStorage.getItem('idUsuarioActivo') || 1;
@@ -73,33 +73,40 @@ document.getElementById('btn-limpiar-prestamo').addEventListener('click', () => 
 // eliminar prestamo
 document.getElementById('btn-confirmar-eliminar').addEventListener('click', async () => {
     const id = document.getElementById('elim-id').value;
-    if (!id) return alert('Ingresa un ID.');
+    if (!id) return mostrarModal('Ingresa un ID.');
     if (!confirm(`¿Eliminar préstamo ${id}?`)) return;
-    const catchError = await fetch(`${BASE_URL}/prestamos/${id}`, { method: 'DELETE' });
-    if (catchError.status === 500) {
-        return mostrarModal('No se puede eliminar: este préstamo tiene transacciones asociadas.');
+    
+    try {
+        const response = await fetch(`${BASE_URL}/prestamos/${id}`, { method: 'DELETE' });
+        if (response.status === 500) {
+            return mostrarModal('No se puede eliminar: este préstamo tiene transacciones asociadas.');
+        }
+        if (!response.ok) throw new Error();
+        
+        mostrarModal('Eliminado correctamente.');
+        cargarTabla();
+    } catch {
+        mostrarModal('Error al eliminar el préstamo.');
     }
-    mostrarModal('Eliminado correctamente.');
-    cargarTabla();
 });
- 
+
 // modificar prestamo
 document.getElementById('btn-guardar-modificar').addEventListener('click', async () => {
     const id = document.getElementById('mod-id').value;
-    if (!id) return alert('Ingresa un ID.');
+    if (!id) return mostrarModal('Ingresa un ID.');
     const data = {
         fechaMaxDevolucion: document.getElementById('mod-fecha').value,
         estado:             document.getElementById('mod-estado').value,
     };
     try {
         await modificarPrestamo(id, data);
-        alert('Modificado correctamente.');
+        mostrarModal('Modificado correctamente.');
         cargarTabla();
-    } catch {
-        alert('Error al modificar.');
+    } catch (error) {
+        mostrarModal(error.message || 'Error al modificar.');
     }
 });
- 
+
 // limpiar modificar
 document.getElementById('btn-limpiar-modificar').addEventListener('click', () => {
     ['mod-id', 'mod-fecha', 'mod-estado']
