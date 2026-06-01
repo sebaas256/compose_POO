@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
+    <link rel="stylesheet" href="https://cdn.datatables.net/1.13.6/css/jquery.dataTables.min.css">
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Libros - Biblioteca</title>
@@ -160,15 +161,14 @@
         <!-- TODO (Backend): GET /api/libros -->
         <div class="seccion">
             <h2 class="seccion__titulo">Listado de Libros</h2>
-            <table class="tabla">
+            <table class="tabla" id="tabla-libros">
                 <thead>
                     <tr>
                         <th>#</th><th>Código</th><th>Título</th><th>Autor</th>
                         <th>Editorial</th><th>Género</th><th>Stock</th><th>Estado</th>
                     </tr>
                 </thead>
-                <tbody id="tabla-libros">
-                    <!-- libros.js inserta filas aquí -->
+                <tbody >
                 </tbody>
             </table>
         </div>
@@ -177,4 +177,7 @@
 </div>
 <script type="module" src="js/libros.js"></script>
 </body>
+<script src="https://code.jquery.com/jquery-3.7.0.min.js"></script>
+<script src="https://cdn.datatables.net/1.13.6/js/jquery.dataTables.min.js"></script>
+<script type="module" src="js/libros.js"></script>
 </html>

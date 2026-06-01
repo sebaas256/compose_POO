@@ -22,12 +22,16 @@ async function cargarTabla() {
     let lista;
     try {
         lista = await getLibros();
-        console.log("lista cargada");  
+        
     } catch {
-        lista = EJEMPLO;
-        console.log("xd");  
+        lista = [];
     }
-    document.getElementById('tabla-libros').innerHTML = lista.map(l => `
+
+    if ($.fn.DataTable.isDataTable('#tabla-libros')) {
+        $('#tabla-libros').DataTable().destroy();
+    }
+
+    document.getElementById('tabla-libros').querySelector('tbody').innerHTML = lista.map(l => `
         <tr>
             <td>${l.idLibro}</td>
             <td>${l.codigo}</td>
@@ -41,6 +45,8 @@ async function cargarTabla() {
                 : '<span class="badge badge--rojo">Sin stock</span>'}</td>
         </tr>
     `).join('');
+
+    $('#tabla-libros').DataTable({ pageLength: 10 });
 }
 
 // ── Guardar libro ─────────────────────────────────────────────

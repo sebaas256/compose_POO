@@ -36,7 +36,14 @@ async function cargarTabla() {
     } catch {
         lista = EJEMPLO;
     }
-    document.getElementById('tabla-estudiantes').innerHTML = lista.map(e => `
+
+    // Destruir DataTable si ya existe
+    if ($.fn.DataTable.isDataTable('#tabla-estudiantes')) {
+        $('#tabla-estudiantes').DataTable().destroy();
+    }
+
+    // Llenar la tabla primerop
+    document.getElementById('tabla-estudiantes').querySelector('tbody').innerHTML = lista.map(e => `
         <tr>
             <td>${e.idEstudiante}</td>
             <td>${e.nombre}</td>
@@ -46,6 +53,12 @@ async function cargarTabla() {
             <td>${e.email}</td>
         </tr>
     `).join('');
+
+    // Inicializar DataTable 
+    $('#tabla-estudiantes').DataTable({
+        pageLength: 20
+    });
+
 }
 
 //btn guardar estudiante

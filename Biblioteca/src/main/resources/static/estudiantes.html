@@ -1,12 +1,17 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
+    <link rel="stylesheet" href="https://cdn.datatables.net/1.13.6/css/jquery.dataTables.min.css">
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Estudiantes - Biblioteca</title>
     <link rel="stylesheet" href="css/main.css">
+    
+
 </head>
+
 <body>
+
 <div class="layout">
 
 <aside id="sidebar" class="sidebar"></aside>
@@ -128,24 +133,28 @@
 
 
         <!-- Tabla -->
-        <!-- TODO (Backend): GET /api/estudiantes -->
         <div class="seccion">
             <h2 class="seccion__titulo">Listado de Estudiantes</h2>
-            <table class="tabla">
+            <table class="tabla" id="tabla-estudiantes">
                 <thead>
                     <tr>
-                        <th>#</th><th>Nombre</th><th>Apellido</th>
-                        <th>Género</th><th>Edad</th><th>Email</th>
+                        <th>#</th>
+                        <th>Nombre</th>
+                        <th>Apellido</th>
+                        <th>Género</th>
+                        <th>Edad</th>
+                        <th>Email</th>
                     </tr>
                 </thead>
-                <tbody id="tabla-estudiantes">
-                    <!-- estudiantes.js inserta filas aquí -->
+                <tbody >
                 </tbody>
             </table>
         </div>
     </main>
 
 </div>
+<script src="https://code.jquery.com/jquery-3.7.0.min.js"></script>
+<script src="https://cdn.datatables.net/1.13.6/js/jquery.dataTables.min.js"></script>
 <script type="module" src="js/estudiantes.js"></script>
 </body>
 </html>
