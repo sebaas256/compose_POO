@@ -2,13 +2,17 @@
 // transacciones.js — Transacciones y Sanciones
 // ============================================================
 import './sidebar.js';
-import { getTransacciones, crearTransaccion } from './api.js';
-
+import { mostrarModal } from './sidebar.js';    
+import { getTransacciones, crearTransaccion, eliminarTransaccion, modificarTransaccion, BASE_URL } from './api.js';
 // const EJEMPLO = [
 //     { id: 1, prestamo: 2, atendidoPor: 'admin', mora: 3.75, fecha: '2026-05-21', detalle: 'Cobro de multa por entrega tardía' },
 //     { id: 2, prestamo: 1, atendidoPor: 'admin', mora: 0.00, fecha: '2026-05-14', detalle: 'Emisión de ticket - Sin cargos'    },
 // ];
-
+const Titulo = document.getElementById('titulo-formulario');
+const FormRegistrar = document.getElementById('form-registrar');
+const FormEliminar = document.getElementById('form-eliminar');
+const FormModificar = document.getElementById('form-modificar');
+mostrarFormulario('registrar');
 async function cargarTabla() {
     let lista;
     try {
@@ -49,8 +53,73 @@ document.getElementById('btn-guardar-transaccion').addEventListener('click', asy
     }
 });
 
+
+//limpiar formularios
 document.getElementById('btn-limpiar-transaccion').addEventListener('click', () => {
     ['tra-prestamo','tra-mora','tra-detalle'].forEach(id => document.getElementById(id).value = '');
 });
 
+document.getElementById('btn-limpiar-modificar').addEventListener('click', () => {
+    ['mod-id','mod-mora','mod-detalle']
+        .forEach(id => document.getElementById(id).value = '');
+});
+
 cargarTabla();
+
+
+//eliminar y modificar
+// Eliminar transaccion
+    document.getElementById('btn-confirmar-eliminar').addEventListener('click', async () => {
+        const id = document.getElementById('elim-id').value;
+        if (!id) return mostrarModal('Ingresa un ID.');
+        if (!confirm(`¿Eliminar transacción ${id}?`)) return;
+        const catchError = await fetch(`${BASE_URL}/transaccion/${id}`, { method: 'DELETE' });
+        if (catchError.status === 500) {
+            return mostrarModal('No se puede eliminar esta transacción.');
+        }
+        mostrarModal('Eliminado correctamente.');
+        cargarTabla();
+    });
+
+    // Modificar transaccion
+    document.getElementById('btn-guardar-modificar').addEventListener('click', async () => {
+        const id = document.getElementById('mod-id').value;
+        if (!id) return mostrarModal('Ingresa un ID.');
+        const data = {
+            mora:               parseFloat(document.getElementById('mod-mora').value) || 0,
+            detalleTransaccion: document.getElementById('mod-detalle').value.trim(),
+        };
+        try {
+            await modificarTransaccion(id, data);
+            mostrarModal('Modificado correctamente.');
+            cargarTabla();
+        } catch {
+            mostrarModal('Error al modificar.');
+        }
+    });
+
+
+
+
+            //cual es el formulario a mostrar
+function mostrarFormulario(cual) {
+            FormRegistrar.style.display = 'none';
+            FormModificar.style.display = 'none';
+            FormEliminar.style.display  = 'none';
+
+            if (cual === 'registrar') {
+                FormRegistrar.style.display = 'block'; //block mostrar formulario
+                Titulo.textContent = 'Registrar Transacción';
+            } else if (cual === 'modificar') {
+                FormModificar.style.display = 'block';
+                Titulo.textContent = 'Modificar Transacción';
+            } else if (cual === 'eliminar') {
+                FormEliminar.style.display  = 'block';
+                Titulo.textContent = 'Eliminar Transacción';
+            }
+        }
+
+        // Vincular botones
+        document.getElementById('btn-registrar').addEventListener('click', () => mostrarFormulario('registrar'));
+        document.getElementById('btn-eliminar').addEventListener('click',  () => mostrarFormulario('eliminar'));
+        document.getElementById('btn-modificar').addEventListener('click', () => mostrarFormulario('modificar'));

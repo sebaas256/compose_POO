@@ -2,7 +2,8 @@
 // libros.js — Gestión de Libros
 // ============================================================
 import './sidebar.js';
-import { getLibros, crearLibro, eliminarLibro, modificarLibro } from './api.js'; //api.js es el archivo donde se hacen las llamadas al backend, se importa para usar sus funciones
+import { mostrarModal } from './sidebar.js';
+import { getLibros, crearLibro, eliminarLibro, modificarLibro, BASE_URL } from './api.js'; //api.js es el archivo donde se hacen las llamadas al backend, se importa para usar sus funciones
 
 const Titulo = document.getElementById('titulo-formulario');
 const FormRegistrar = document.getElementById('form-registrar');
@@ -64,11 +65,16 @@ document.getElementById('btn-guardar-libro').addEventListener('click', async () 
     }
 });
 
+//limpiar formulario registrar libro
 document.getElementById('btn-limpiar-libro').addEventListener('click', () => {
     ['lib-codigo','lib-titulo','lib-autor','lib-editorial','lib-genero','lib-stock']
         .forEach(id => document.getElementById(id).value = '');
 });
-
+//limpiar formulario modificar libro
+document.getElementById('btn-limpiar-modificar').addEventListener('click', () => {
+    ['mod-id','mod-codigo','mod-titulo','mod-autor','mod-editorial','mod-genero','mod-stock']
+        .forEach(id => document.getElementById(id).value = '');
+});
 cargarTabla();
 
 
@@ -79,11 +85,17 @@ cargarTabla();
             if (!id) return alert('Ingresa un ID.');
             if (!confirm(`¿Eliminar libro ${id}?`)) return;
             try {
-                await eliminarLibro(id);
-                alert('Eliminado correctamente.');
+                const response = await fetch(`${BASE_URL}/libros/${id}`, { method: 'DELETE' });
+                if (response.status === 500) {
+                    return mostrarModal('No se puede eliminar: este libro tiene préstamos asociados.');
+                }
+                if (!response.ok) {
+                    throw new Error('Error al eliminar.');
+                }
+                mostrarModal('Eliminado correctamente.');
                 cargarTabla();
             } catch {
-                alert('Error al eliminar.');
+                mostrarModal('Error al eliminar.');
             }
         });
 

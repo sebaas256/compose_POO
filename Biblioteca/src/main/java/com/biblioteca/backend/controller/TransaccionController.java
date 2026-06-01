@@ -19,7 +19,7 @@ import org.springframework.web.bind.annotation.CrossOrigin;
  */
 @RestController
 @RequestMapping("/api/transaccion")
-@CrossOrigin(origins = "*") //estenigga
+@CrossOrigin(origins = "*") 
 public class TransaccionController {
 
     @Autowired

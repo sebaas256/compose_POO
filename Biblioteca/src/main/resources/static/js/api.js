@@ -2,8 +2,8 @@
 // api.js — Llamadas al backend
 // Importar en cada vista: import { getLibros } from './api.js';
 // ============================================================
-
-const BASE_URL = 'http://localhost:8080/api';
+//export for modals
+export const BASE_URL = 'http://localhost:8080/api';
 
 // ── Autenticación ─────────────────────────────────────────────
 // TODO (Backend): POST /api/login
@@ -51,8 +51,7 @@ export async function crearLibro(data) {
     return res.json();
 }
 // delete /api/libros/{id}
-// TODO (Backend): DELETE /api/libros/{id}
-export async function eliminarLibro(id) {
+export async function eliminarLibro(id) { 
     const res = await fetch(`${BASE_URL}/libros/${id}`, { method: 'DELETE' });
     return res.text();
 }
@@ -117,6 +116,20 @@ export async function crearPrestamo(data) {
     });
     return res.json();
 }
+//eliminar prestamo
+export async function eliminarPrestamo(id) {
+    const res = await fetch(`${BASE_URL}/prestamos/${id}`, { method: 'DELETE' });
+    return res;
+}
+//modificar prestamo
+export async function modificarPrestamo(id, data) {
+    const res = await fetch(`${BASE_URL}/prestamos/${id}`, {
+        method: 'PUT',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(data)
+    });
+    return res.json();
+}
 
 // ── Transacciones ─────────────────────────────────────────────
 // TODO (Backend): GET /api/transacciones
@@ -131,7 +144,27 @@ export async function crearTransaccion(data) {
     const res = await fetch(`${BASE_URL}/transaccion`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(data)
+        body: JSON.stringify({
+            prestamo: { idPrestamo: data.idPrestamo },
+            usuario:  { idUsuario: data.idUsuario },
+            mora:     data.mora,
+            detalleTransaccion: data.detalleTransaccion
+        })
     });
     return res.json();
+}
+
+// eliminar trans 
+export async function eliminarTransaccion(id) {
+    const res = await fetch(`${BASE_URL}/transaccion/${id}`, { method: 'DELETE' });
+    return res.text();
+}
+// modificar 
+export async function modificarTransaccion(id, data) {
+    const res = await fetch(`${BASE_URL}/transaccion/${id}`, {
+        method: 'PUT',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(data)
+    });
+    return res.text();
 }

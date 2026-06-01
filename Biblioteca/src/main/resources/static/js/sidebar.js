@@ -57,3 +57,24 @@ document.getElementById('btn-cerrar-sesion').addEventListener('click', () => {
     sessionStorage.clear();
     window.location.href = 'index.html';
 });
+
+
+//modal reusable
+// Modal global
+document.body.insertAdjacentHTML('beforeend', `
+    <div class="modal-overlay" id="modal-overlay">
+        <div class="modal-caja">
+            <p id="modal-mensaje"></p>
+            <button class="btn btn--primario" id="modal-cerrar">Aceptar</button>
+        </div>
+    </div>
+`);
+
+    document.getElementById('modal-cerrar').addEventListener('click', () => {
+    document.getElementById('modal-overlay').classList.remove('activo');
+});
+
+export function mostrarModal(mensaje) {
+    document.getElementById('modal-mensaje').textContent = mensaje; //msj a mostrar
+    document.getElementById('modal-overlay').classList.add('activo'); 
+}

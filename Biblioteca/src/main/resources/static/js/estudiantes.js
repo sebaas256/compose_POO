@@ -4,7 +4,9 @@
 
 // imports
 import './sidebar.js';
-import { getEstudiantes, crearEstudiante, eliminarEstudiante, modificarEstudiante } from './api.js';
+import { mostrarModal } from './sidebar.js';
+import { getEstudiantes, crearEstudiante, eliminarEstudiante, modificarEstudiante, BASE_URL } from './api.js';
+console.log(typeof mostrarModal);
 
 //consts
 const FormRegistrar = document.getElementById('form-registrar');
@@ -71,6 +73,15 @@ document.getElementById('btn-limpiar-estudiante').addEventListener('click', () =
     ['est-nombre','est-apellido','est-genero','est-edad','est-email','est-clave']
         .forEach(id => document.getElementById(id).value = '');
 });
+document.getElementById('btn-limpiar-modificar').addEventListener('click', () => {
+        ['mod-id',
+        'mod-nombre',
+        'mod-apellido',
+        'mod-genero','mod-edad'
+        ,'mod-email',
+        'mod-clave']
+        .forEach(id => document.getElementById(id).value = '');
+});
 
 //btn eliminar estudiante
 // no se borra por relacion con llaves foraneas a prestamos, 
@@ -78,15 +89,13 @@ document.getElementById('btn-confirmar-eliminar').addEventListener('click', asyn
     const id = document.getElementById('elim-id').value;
     if (!id) return alert('Ingresa un ID.');
     if (!confirm(`¿Eliminar estudiante ${id}?`)) return;
-    try {
-        await eliminarEstudiante(id);
-        alert('Eliminado correctamente.');
-        cargarTabla();
-    } catch {
-        alert('Error al eliminar.');
+    const catchError = await fetch(`${BASE_URL}/estudiantes/${id}`, { method: 'DELETE' });
+    if (catchError.status === 500) {
+        return mostrarModal('No se puede eliminar el estudiante porque tiene préstamos asociados.');
     }
+    mostrarModal('Estudiante eliminado correctamente.');
+    cargarTabla();
 });
-
 //btn modificar estudiante
 document.getElementById('btn-guardar-modificar').addEventListener('click', async () => {
     const id = document.getElementById('mod-id').value;
