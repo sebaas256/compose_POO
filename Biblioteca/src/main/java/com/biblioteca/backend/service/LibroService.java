@@ -26,6 +26,10 @@ public class LibroService {
         if (libro.getStock() < 0) {
             throw new IllegalArgumentException("El stock inical no debe ser menor a 0");
         }
+        // alertar disponibilidad baja
+        if (libro.getStock() > 0 && libro.getStock() <= 3){
+            System.out.println("El libro " + libro.getTitulo() + " tiene un stock bajo: " + libro.getStock() + " unidades restantes.");
+        }
         return libroRepository.save(libro);
     }
 
@@ -43,6 +47,14 @@ public class LibroService {
 
     public Libro modificarLibro(int id, Libro libro) {
         if (libroRepository.existsById(id)) {
+            if (libro.getStock() < 0) {
+                throw new IllegalArgumentException("El stock no debe ser menor a 0");
+            }
+
+            if (libro.getStock() > 0 && libro.getStock() <= 3){
+                System.out.println("El libro " + libro.getTitulo() + " tiene un stock bajo: " + libro.getStock() + " unidades restantes.");
+            }
+            
             libro.setIdLibro(id);
             libro.setDisponibilidad(libro.getStock() > 0); // actualiza el estado según el stock
             return libroRepository.save(libro);
