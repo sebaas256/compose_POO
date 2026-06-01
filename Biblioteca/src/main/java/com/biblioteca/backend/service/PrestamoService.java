@@ -29,7 +29,7 @@ public class PrestamoService {
     }
 
 public Prestamo modificarPrestamo(int id, Prestamo prestamo) {  
-    return prestamoRepository.findById(id).map(existente -> {   // busca el prestamo existente en la DB con findById
+    return prestamoRepository.findById(id).map(existente -> {   // findById busca el prestamo existente en la DB 
         if (prestamo.getFechaMaxDevolucion() != null)           // modifica fecha 
             existente.setFechaMaxDevolucion(prestamo.getFechaMaxDevolucion());
         if (prestamo.getEstado() != null) {                     // modifica estado si viene
