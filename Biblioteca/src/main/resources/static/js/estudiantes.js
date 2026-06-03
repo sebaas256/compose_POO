@@ -71,13 +71,13 @@ document.getElementById('btn-guardar-estudiante').addEventListener('click', asyn
         email:       document.getElementById('est-email').value.trim(),
         claveAcceso: document.getElementById('est-clave').value.trim(),
     };
-    if (!data.nombre || !data.apellido) return alert('Nombre y Apellido son requeridos.');
+    if (!data.nombre || !data.apellido) return mostrarModal('Nombre y Apellido son requeridos.');
     try {
         await crearEstudiante(data);
-        alert('Estudiante guardado correctamente.');
+        mostrarModal('Estudiante guardado correctamente.');
         cargarTabla();
     } catch {
-        alert('Backend no disponible aún. El estudiante no fue guardado.');
+        mostrarModal('Backend no disponible aún. El estudiante no fue guardado.');
     }
 });
 

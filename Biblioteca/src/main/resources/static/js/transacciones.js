@@ -13,26 +13,34 @@ const FormRegistrar = document.getElementById('form-registrar');
 const FormEliminar = document.getElementById('form-eliminar');
 const FormModificar = document.getElementById('form-modificar');
 mostrarFormulario('registrar');
+
+
 async function cargarTabla() {
     let lista;
     try {
         lista = await getTransacciones();
     } catch {
-        lista = EJEMPLO;
+        lista = [];
     }
-    //libro? estudiante? usuario? prestamo? —> para mostrar en tabla ? signifiac que puede ser null, y el ?? '—' es para mostrar un guion si es null
+
+    if ($.fn.DataTable.isDataTable('#tabla-transacciones')) {
+        $('#tabla-transacciones').DataTable().destroy();
+    }
+//libro? estudiante? usuario? prestamo? —> para mostrar en tabla ? signifiac que puede ser null, y el ?? '—' es para mostrar un guion si es null
     //to fixed(2) para mostrar 2 decimales en la mora
-    document.getElementById('tabla-transacciones').innerHTML = lista.map(t => `
+    document.getElementById('tabla-transacciones').querySelector('tbody').innerHTML = lista.map(t => `
         <tr>
             <td>${t.IdTransaccion}</td>
-            <td>${t.prestamo?.estudiante?.nombre ?? 'N/A'} ${t.prestamo?.estudiante?.apellido ?? 'N/A'}</td>
-            <td>${t.prestamo?.libro?.titulo ?? 'N/A'}</td> 
-            <td>${t.usuario?.nombreUsuario ?? 'N/A'}</td>            
+            <td>${t.prestamo?.estudiante?.nombre ?? 'N/A'} ${t.prestamo?.estudiante?.apellido ?? ''}</td>
+            <td>${t.prestamo?.libro?.titulo ?? 'N/A'}</td>
+            <td>${t.usuario?.nombreUsuario ?? 'N/A'}</td>
             <td>${t.mora.toFixed(2)}</td>
             <td>${t.fechaTransaccion}</td>
             <td>${t.detalleTransaccion}</td>
         </tr>
     `).join('');
+
+    $('#tabla-transacciones').DataTable({ pageLength: 10 });
 }
 
 document.getElementById('btn-guardar-transaccion').addEventListener('click', async () => {
@@ -43,13 +51,13 @@ document.getElementById('btn-guardar-transaccion').addEventListener('click', asy
         mora:               parseFloat(document.getElementById('tra-mora').value) || 0,
         detalleTransaccion: document.getElementById('tra-detalle').value.trim(),
     };
-    if (!data.idPrestamo) return alert('ID de Préstamo es requerido.');
+    if (!data.idPrestamo) return mostrarModal('ID de Préstamo es requerido.');
     try {
         await crearTransaccion(data);
-        alert('Transacción registrada correctamente.');
+        mostrarModal('Transacción registrada correctamente.');
         cargarTabla();
     } catch {
-        alert('Backend no disponible aún. La transacción no fue guardada.');
+        mostrarModal('Backend no disponible aún. La transacción no fue guardada.');
     }
 });
 

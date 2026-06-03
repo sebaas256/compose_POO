@@ -2,6 +2,7 @@
 <html lang="es">
 <head>
     <meta charset="UTF-8">
+    <link rel="stylesheet" href="https://cdn.datatables.net/1.13.6/css/jquery.dataTables.min.css">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Préstamos - Biblioteca</title>
     <link rel="stylesheet" href="css/main.css">
@@ -89,23 +90,24 @@
             </div>
         </div>
 
-
-        
         <!-- Tabla -->
         <div class="seccion">
             <h2 class="seccion__titulo">Listado de Préstamos</h2>
-            <table class="tabla">
+            <table class="tabla" id="tabla-prestamos">
                 <thead>
                     <tr>
                         <th>#</th><th>Estudiante</th><th>Libro</th><th>Atendido Por</th>
                         <th>Fecha Salida</th><th>Máx. Devolución</th><th>Entrega</th><th>Estado</th>
                     </tr>
                 </thead>
-                <tbody id="tabla-prestamos"></tbody>
+                <tbody></tbody>
             </table>
         </div>
     </main>
 </div>
-<script type="module" src="js/prestamos.js"></script>
+
 </body>
+<script type="module" src="js/prestamos.js"></script>
+<script src="https://code.jquery.com/jquery-3.7.0.min.js"></script>
+<script src="https://cdn.datatables.net/1.13.6/js/jquery.dataTables.min.js"></script>
 </html>

@@ -90,7 +90,7 @@ cargarTabla();
 
         document.getElementById('btn-confirmar-eliminar').addEventListener('click', async () => {
             const id = document.getElementById('elim-id').value;
-            if (!id) return alert('Ingresa un ID.');
+            if (!id) return mostrarModal('Ingresa un ID.');
             if (!confirm(`¿Eliminar libro ${id}?`)) return;
             try {
                 const response = await fetch(`${BASE_URL}/libros/${id}`, { method: 'DELETE' });

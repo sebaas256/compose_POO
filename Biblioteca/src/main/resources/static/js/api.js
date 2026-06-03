@@ -146,7 +146,7 @@ export async function crearTransaccion(data) {
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
             prestamo: { idPrestamo: data.idPrestamo },
-            usuario:  { idUsuario: data.idUsuario },
+            usuario:  { idUsuario: 1 }, //hardcoded user admin (no toma en cuenta diferentes users )
             mora:     data.mora,
             detalleTransaccion: data.detalleTransaccion
         })

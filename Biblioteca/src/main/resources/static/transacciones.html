@@ -2,6 +2,7 @@
 <html lang="es">
 <head>
     <meta charset="UTF-8">
+    <link rel="stylesheet" href="https://cdn.datatables.net/1.13.6/css/jquery.dataTables.min.css">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Transacciones - Biblioteca</title>
     <link rel="stylesheet" href="css/main.css">
@@ -89,26 +90,10 @@
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
         <!-- Tabla -->
-        <!-- TODO (Backend): GET /api/transacciones -->
         <div class="seccion">
             <h2 class="seccion__titulo">Historial de Transacciones</h2>
-            <table class="tabla">
+            <table class="tabla" id="tabla-transacciones">
                 <thead>
 
                     <tr>
@@ -122,7 +107,7 @@
                     </tr>
 
                 </thead>
-                <tbody id="tabla-transacciones">
+                <tbody>
                     <!-- transacciones.js inserta filas aquí -->
                 </tbody>
             </table>
@@ -130,6 +115,9 @@
     </main>
 
 </div>
-<script type="module" src="js/transacciones.js"></script>
+
 </body>
+<script type="module" src="js/transacciones.js"></script>
+<script src="https://code.jquery.com/jquery-3.7.0.min.js"></script>
+<script src="https://cdn.datatables.net/1.13.6/js/jquery.dataTables.min.js"></script>
 </html>

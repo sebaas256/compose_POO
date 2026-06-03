@@ -22,9 +22,14 @@ async function cargarTabla() {
     try {
         lista = await getPrestamos();
     } catch {
-        lista = EJEMPLO;
+        lista = [];
     }
-    document.getElementById('tabla-prestamos').innerHTML = lista.map(p => `
+
+    if ($.fn.DataTable.isDataTable('#tabla-prestamos')) {
+        $('#tabla-prestamos').DataTable().destroy();
+    }
+
+    document.getElementById('tabla-prestamos').querySelector('tbody').innerHTML = lista.map(p => `
         <tr>
             <td>${p.idPrestamo}</td>
             <td>${p.estudiante?.nombre ?? '—'} ${p.estudiante?.apellido ?? ''}</td>
@@ -40,8 +45,9 @@ async function cargarTabla() {
                 : '<span class="badge badge--azul">Activo</span>'}</td>
         </tr>
     `).join('');
-}
 
+    $('#tabla-prestamos').DataTable({ pageLength: 10 });
+}
 // registrar prestamo
 document.getElementById('btn-guardar-prestamo').addEventListener('click', async () => {
     const usuarioActivo = sessionStorage.getItem('idUsuarioActivo') || 1;
@@ -53,14 +59,14 @@ document.getElementById('btn-guardar-prestamo').addEventListener('click', async 
         estado:             'activo'
     };
     if (!data.idEstudiante || !data.idLibro || !data.fechaMaxDevolucion) {
-        return alert('Todos los campos son requeridos para registrar el préstamo.');
+        return mostrarModal('Todos los campos son requeridos para registrar el préstamo.');
     }
     try {
         await crearPrestamo(data);
-        alert('Préstamo registrado correctamente.');
+        mostrarModal('Préstamo registrado correctamente.');
         cargarTabla();
     } catch {
-        alert('Error al registrar el préstamo.');
+        mostrarModal('Error al registrar el préstamo.');
     }
 });
  
