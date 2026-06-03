@@ -25,6 +25,21 @@ public class EstudianteService {
     }
     
     public Estudiante guardarEstudiante(Estudiante estudiante){
+        if(estudiante.getEdad() < 0){
+            throw new IllegalArgumentException("La edad no puede ser negativa");
+        }
+        if(estudiante.getNombre() == null || estudiante.getNombre().isBlank()){
+            throw new IllegalArgumentException("El nombre es obligatorio");
+        }
+        if(estudiante.getApellido() == null || estudiante.getApellido().isBlank()){
+            throw new IllegalArgumentException("El apellido es obligatorio");
+        }
+        if(estudiante.getEmail() == null || !estudiante.getEmail().contains("@")){
+            throw new IllegalArgumentException("Ingrese un correo electrónico válido");
+        }
+        if(estudiante.getClaveAcceso() == null || estudiante.getClaveAcceso().length() < 6){
+            throw new IllegalArgumentException("La contraseña debe tener al menos 6 caracteres");
+        }
         return estudianteRepository.save(estudiante);
     }
     
