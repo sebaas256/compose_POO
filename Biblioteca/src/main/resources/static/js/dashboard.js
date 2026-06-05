@@ -5,7 +5,7 @@ import './sidebar.js';
 import { getMetricas, getUltimosPrestamos } from './api.js';
 
 // ── Datos de ejemplo (eliminar cuando el backend esté listo) ──
-const EJEMPLO_METRICAS = { totalEjemplares: 635, prestamosActivos: 33, enMora: 10, totalRecaudado: 42.50 };
+const EJEMPLO_METRICAS = { };
 const EJEMPLO_PRESTAMOS = [
     { estudiante: 'Rodrigo Pineda',   libro: 'Java a Fondo',               atendidoPor: 'admin', estado: 'devuelto', multa: 0.00,  detalle: 'Sin cargos'              },
     { estudiante: 'Valeria Guzman',   libro: 'Clean Code',                 atendidoPor: 'admin', estado: 'mora',     multa: 3.75,  detalle: 'Cobro por entrega tardía' },
@@ -22,7 +22,7 @@ async function cargarMetricas() {
         m = EJEMPLO_METRICAS;   // fallback a datos de ejemplo
     }
     document.getElementById('metrica-ejemplares').textContent = m.totalEjemplares;
-    document.getElementById('metrica-activos').textContent    = m.prestamosActivos;
+    document.getElementById('metrica-activos').textContent    = m.PrestamosActivos;
     document.getElementById('metrica-mora').textContent       = m.enMora;
     document.getElementById('metrica-recaudado').textContent  = '$' + m.totalRecaudado.toFixed(2);
 }

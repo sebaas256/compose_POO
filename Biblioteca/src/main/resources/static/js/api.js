@@ -22,7 +22,7 @@ export async function login(nombreUsuario, password) {
 // TODO (Backend): GET /api/dashboard/metricas
 // Respuesta: { totalEjemplares, prestamosActivos, enMora, totalRecaudado }
 export async function getMetricas() {
-    const res = await fetch(`${BASE_URL}/dashboard/metricas`);
+    const res = await fetch(`${BASE_URL}/dashboard/resumen`);
     return res.json();
 }
 
