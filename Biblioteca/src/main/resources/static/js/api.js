@@ -19,19 +19,19 @@ export async function login(nombreUsuario, password) {
 }
 
 // ── Dashboard ─────────────────────────────────────────────────
-// TODO (Backend): GET /api/dashboard/metricas
 // Respuesta: { totalEjemplares, prestamosActivos, enMora, totalRecaudado }
 export async function getMetricas() {
     const res = await fetch(`${BASE_URL}/dashboard/resumen`);
     return res.json();
 }
 
-// TODO (Backend): GET /api/dashboard/ultimos-prestamos
-// Respuesta: [ { estudiante, libro, atendidoPor, estado, multa, detalle } ]
+// Respuesta: Arreglo de préstamos para la tabla del panel
 export async function getUltimosPrestamos() {
-    const res = await fetch(`${BASE_URL}/dashboard/ultimos-prestamos`);
+    const res = await fetch(`${BASE_URL}/prestamos`);
+    console.log(res);
     return res.json();
 }
+
 
 // ── Libros ────────────────────────────────────────────────────
 // TODO (Backend): GET /api/libros
@@ -50,6 +50,7 @@ export async function crearLibro(data) {
     });
     return res.json();
 }
+
 // delete /api/libros/{id}
 export async function eliminarLibro(id) { 
     const res = await fetch(`${BASE_URL}/libros/${id}`, { method: 'DELETE' });
@@ -58,12 +59,13 @@ export async function eliminarLibro(id) {
 
 export async function modificarLibro(id, data) {
     const res = await fetch(`${BASE_URL}/libros/${id}`, {
-        method: 'PUT', //pPUT viene de "update" y se usa para modificar recursos existentes que vienen de libros/{id}
-        headers: { 'Content-Type': 'application/json' }, //
+        method: 'PUT', //PUT viene de "update" y se usa para modificar recursos existentes que vienen de libros/{id}
+        headers: { 'Content-Type': 'application/json' }, 
         body: JSON.stringify(data)
     });
     return res.text();
 }
+
 // ── Estudiantes ───────────────────────────────────────────────
 // TODO (Backend): GET /api/estudiantes
 export async function getEstudiantes() {
@@ -81,6 +83,7 @@ export async function crearEstudiante(data) {
     });
     return res.json();
 }
+
 // TODO (Backend): DELETE /api/estudiantes/{id}
 export async function eliminarEstudiante(id) {
     const res = await fetch(`${BASE_URL}/estudiantes/${id}`, {
@@ -91,7 +94,7 @@ export async function eliminarEstudiante(id) {
 
 // PUT /api/estudiantes/{id}
 export async function modificarEstudiante(id, data) {
-    const res = await fetch(`${BASE_URL}/estudiantes/${id}`, { //
+    const res = await fetch(`${BASE_URL}/estudiantes/${id}`, { 
         method: 'PUT',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(data)
@@ -116,11 +119,13 @@ export async function crearPrestamo(data) {
     });
     return res.json();
 }
+
 //eliminar prestamo
 export async function eliminarPrestamo(id) {
     const res = await fetch(`${BASE_URL}/prestamos/${id}`, { method: 'DELETE' });
     return res;
 }
+
 //modificar prestamo
 export async function modificarPrestamo(id, data) {
     const res = await fetch(`${BASE_URL}/prestamos/${id}`, {
@@ -146,8 +151,8 @@ export async function crearTransaccion(data) {
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
             prestamo: { idPrestamo: data.idPrestamo },
-            usuario:  { idUsuario: 1 }, //hardcoded user admin (no toma en cuenta diferentes users )
-            mora:     data.mora,
+            usuario:  { idUsuario: 1 }, 
+            mora:      data.mora,
             detalleTransaccion: data.detalleTransaccion
         })
     });
@@ -159,6 +164,7 @@ export async function eliminarTransaccion(id) {
     const res = await fetch(`${BASE_URL}/transaccion/${id}`, { method: 'DELETE' });
     return res.text();
 }
+
 // modificar 
 export async function modificarTransaccion(id, data) {
     const res = await fetch(`${BASE_URL}/transaccion/${id}`, {

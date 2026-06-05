@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
+    <link rel="stylesheet" href="https://cdn.datatables.net/1.13.6/css/jquery.dataTables.min.css">
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Panel Gerencial - Biblioteca</title>
@@ -42,14 +43,20 @@
         <!-- TODO (Backend): GET /api/dashboard/ultimos-prestamos -->
         <div class="seccion">
             <h2 class="seccion__titulo">Últimos Préstamos Procesados (Trazabilidad)</h2>
-            <table class="tabla">
-                <thead>
+            <table class="tabla" id="tabla-prestamos">
+                <thead >
                     <tr>
-                        <th>Estudiante</th><th>Libro</th><th>Atendido Por</th>
-                        <th>Estado</th><th>Multa</th><th>Detalle</th>
+                        <th>ID</th>
+                        <th>Estudiante</th>
+                        <th>Libro</th>
+                        <th>Atendido Por</th>
+                        <th>Fecha Salida</th>
+                        <th>Fecha Máx Devolución</th>
+                        <th>Fecha Entrega</th>
+                        <th>Estado</th>
                     </tr>
                 </thead>
-                <tbody id="tabla-prestamos">
+                <tbody >
                     <!-- dashboard.js inserta filas aquí -->
                 </tbody>
             </table>
@@ -58,5 +65,7 @@
 
 </div>
 <script type="module" src="js/dashboard.js"></script>
+<script src="https://code.jquery.com/jquery-3.7.0.min.js"></script>
+<script src="https://cdn.datatables.net/1.13.6/js/jquery.dataTables.min.js"></script>
 </body>
 </html>
