@@ -3,7 +3,7 @@
 // Importar en cada vista: import { getLibros } from './api.js';
 // ============================================================
 //export for modals
-export const BASE_URL = 'http://100.83.105.3/8080/api';
+export const BASE_URL = 'http://localhost:8080/api';
 
 // ── Autenticación ─────────────────────────────────────────────
 // TODO (Backend): POST /api/login

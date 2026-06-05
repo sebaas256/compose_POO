@@ -7,7 +7,7 @@ document.getElementById('formLogin').addEventListener('submit', function(evento)
         nombreUsuario: usuarioIngresado,
         password: passwordIngresada
     };
-    fetch('http://localhost:8080/api/login', {
+    fetch('http://100.83.105.3:8080/api/login', {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json'
