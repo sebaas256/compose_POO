@@ -50,7 +50,9 @@ document.getElementById('btn-guardar-transaccion').addEventListener('click', asy
         idUsuario:          usuario,
         mora:               parseFloat(document.getElementById('tra-mora').value) || 0,
         detalleTransaccion: document.getElementById('tra-detalle').value.trim(),
+        fechaTransaccion:   new Date().toISOString().slice(0, 19).replace('T', ' ') //toISOSTRING enviar fecha en formato compatible (yyyy-mm-dd hh:mm:ss)
     };
+    
     if (!data.idPrestamo) return mostrarModal('ID de Préstamo es requerido.');
     try {
         await crearTransaccion(data);

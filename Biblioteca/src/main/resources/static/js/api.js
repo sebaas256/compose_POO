@@ -19,19 +19,13 @@ export async function login(nombreUsuario, password) {
 }
 
 // ── Dashboard ─────────────────────────────────────────────────
-// TODO (Backend): GET /api/dashboard/metricas
-// Respuesta: { totalEjemplares, prestamosActivos, enMora, totalRecaudado }
-export async function getMetricas() {
-    const res = await fetch(`${BASE_URL}/dashboard/metricas`);
+
+export async function getUltimosPrestamos() {
+    const res = await fetch(`${BASE_URL}/prestamos`);
+    console.log(res);
     return res.json();
 }
 
-// TODO (Backend): GET /api/dashboard/ultimos-prestamos
-// Respuesta: [ { estudiante, libro, atendidoPor, estado, multa, detalle } ]
-export async function getUltimosPrestamos() {
-    const res = await fetch(`${BASE_URL}/dashboard/ultimos-prestamos`);
-    return res.json();
-}
 
 // ── Libros ────────────────────────────────────────────────────
 // TODO (Backend): GET /api/libros
@@ -64,6 +58,10 @@ export async function modificarLibro(id, data) {
     });
     return res.text();
 }
+
+
+
+///
 // ── Estudiantes ───────────────────────────────────────────────
 // TODO (Backend): GET /api/estudiantes
 export async function getEstudiantes() {

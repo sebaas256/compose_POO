@@ -1,56 +1,48 @@
 // ============================================================
 // dashboard.js — Panel Gerencial
 // ============================================================
+// ============================================================
+// dashboard.js — Panel Gerencial
+// ============================================================
 import './sidebar.js';
-import { getMetricas, getUltimosPrestamos } from './api.js';
+import { getPrestamos } from './api.js';
 
-// ── Datos de ejemplo (eliminar cuando el backend esté listo) ──
-const EJEMPLO_METRICAS = { totalEjemplares: 635, prestamosActivos: 33, enMora: 10, totalRecaudado: 42.50 };
 const EJEMPLO_PRESTAMOS = [
-    { estudiante: 'Rodrigo Pineda',   libro: 'Java a Fondo',               atendidoPor: 'admin', estado: 'devuelto', multa: 0.00,  detalle: 'Sin cargos'              },
-    { estudiante: 'Valeria Guzman',   libro: 'Clean Code',                 atendidoPor: 'admin', estado: 'mora',     multa: 3.75,  detalle: 'Cobro por entrega tardía' },
-    { estudiante: 'Josue Henriquez',  libro: 'CCNA 200-301',               atendidoPor: 'admin', estado: 'activo',   multa: 0.00,  detalle: 'Sin cargos'              },
-    { estudiante: 'Adriana Orellana', libro: 'Cuentos de Barro',           atendidoPor: 'admin', estado: 'devuelto', multa: 0.00,  detalle: 'Sin cargos'              },
+    { estudiante: 'Rodrigo Pineda',   libro: 'Java a Fondo',    atendidoPor: 'admin', estado: 'devuelto', multa: 0.00, detalle: 'Sin cargos' },
+    { estudiante: 'Valeria Guzman',   libro: 'Clean Code',      atendidoPor: 'admin', estado: 'mora',     multa: 3.75, detalle: 'Cobro por entrega tardía' },
+    { estudiante: 'Josue Henriquez',  libro: 'CCNA 200-301',    atendidoPor: 'admin', estado: 'activo',   multa: 0.00, detalle: 'Sin cargos' },
+    { estudiante: 'Adriana Orellana', libro: 'Cuentos de Barro',atendidoPor: 'admin', estado: 'devuelto', multa: 0.00, detalle: 'Sin cargos' },
 ];
 
-// ── Cargar métricas ───────────────────────────────────────────
-async function cargarMetricas() {
-    let m;
-    try {
-        m = await getMetricas(); // TODO: descomentar cuando el backend esté listo
-    } catch {
-        m = EJEMPLO_METRICAS;   // fallback a datos de ejemplo
-    }
-    document.getElementById('metrica-ejemplares').textContent = m.totalEjemplares;
-    document.getElementById('metrica-activos').textContent    = m.prestamosActivos;
-    document.getElementById('metrica-mora').textContent       = m.enMora;
-    document.getElementById('metrica-recaudado').textContent  = '$' + m.totalRecaudado.toFixed(2);
-}
-
-// ── Cargar tabla ──────────────────────────────────────────────
 async function cargarTabla() {
     let lista;
     try {
-        lista = await getUltimosPrestamos(); // TODO: descomentar cuando el backend esté listo
+        lista = await getPrestamos();
     } catch {
-        lista = EJEMPLO_PRESTAMOS;           // fallback a datos de ejemplo
+        lista = [];
     }
 
-    const BADGES = { devuelto: 'badge--verde', activo: 'badge--azul', mora: 'badge--rojo' };
+    if ($.fn.DataTable.isDataTable('#tabla-prestamos')) {
+        $('#tabla-prestamos').DataTable().destroy();
+    }
 
-    document.getElementById('tabla-prestamos').innerHTML = lista.map(p => `
+    document.getElementById('tabla-prestamos').querySelector('tbody').innerHTML = lista.map(p => `
         <tr>
-            <td>${p.estudiante}</td>
-            <td>${p.libro}</td>
-            <td>${p.atendidoPor}</td>
-            <td><span class="badge ${BADGES[p.estado] || 'badge--amarillo'}">${capitalizar(p.estado)}</span></td>
-            <td>$${p.multa.toFixed(2)}</td>
-            <td>${p.detalle}</td>
+            <td>${p.idPrestamo}</td>
+            <td>${p.estudiante?.nombre ?? '—'} ${p.estudiante?.apellido ?? ''}</td>
+            <td>${p.libro?.titulo ?? '—'}</td>
+            <td>${p.usuario?.nombreUsuario ?? '—'}</td>
+            <td>${p.fechaSalida?.split('T')[0] ?? '—'}</td>
+            <td>${p.fechaMaxDevolucion?.split('T')[0] ?? '—'}</td>
+            <td>${p.fechaEntrega?.split('T')[0] ?? 'Pendiente'}</td>
+            <td>${p.estado === 'Devuelto'
+                ? '<span class="badge badge--verde">Devuelto</span>'
+                : p.estado === 'Mora'
+                ? '<span class="badge badge--rojo">Mora</span>'
+                : '<span class="badge badge--azul">Activo</span>'}</td>
         </tr>
     `).join('');
+
+    $('#tabla-prestamos').DataTable({ pageLength: 10 });
 }
-
-function capitalizar(s) { return s.charAt(0).toUpperCase() + s.slice(1); }
-
-cargarMetricas();
 cargarTabla();
