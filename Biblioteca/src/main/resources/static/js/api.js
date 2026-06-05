@@ -153,7 +153,8 @@ export async function crearTransaccion(data) {
             prestamo: { idPrestamo: data.idPrestamo },
             usuario:  { idUsuario: 1 }, 
             mora:      data.mora,
-            detalleTransaccion: data.detalleTransaccion
+            detalleTransaccion: data.detalleTransaccion,
+            fechaTransaccion: data.fechaTransaccion
         })
     });
     return res.json();

@@ -50,8 +50,11 @@ document.getElementById('btn-guardar-transaccion').addEventListener('click', asy
         idUsuario:          usuario,
         mora:               parseFloat(document.getElementById('tra-mora').value) || 0,
         detalleTransaccion: document.getElementById('tra-detalle').value.trim(),
-        fechaTransaccion:   new Date().toISOString().slice(0, 19).replace('T', ' ') //toISOSTRING enviar fecha en formato compatible (yyyy-mm-dd hh:mm:ss)
-    };
+// Calculamos la hora exacta restando los minutos de diferencia de nuestra zona horaria
+        fechaTransaccion: new Date(Date.now() - new Date().getTimezoneOffset() * 60000)
+            .toISOString()
+            .slice(0, 19)
+            .replace('T', ' ')    };
     
     if (!data.idPrestamo) return mostrarModal('ID de Préstamo es requerido.');
     try {
